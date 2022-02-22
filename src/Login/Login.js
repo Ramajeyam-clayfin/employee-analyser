@@ -1,10 +1,11 @@
 import React, {useState} from "react";
+import './login.css';
 import { useSelector, useDispatch  } from 'react-redux';
 import * as actionCreators from './ReduxReducers/Actions';
 import { Form,Button, Stack, Container } from 'react-bootstrap'; 
 import Employee from '../Employee/Employee'
 import Manager from '../Manager/Manager'
-import './login.css';
+
 
 export default function Login (){
     const logindata = useSelector( (state) => state.account)

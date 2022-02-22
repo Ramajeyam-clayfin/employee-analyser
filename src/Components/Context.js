@@ -6,40 +6,48 @@ export const DataProvider = (props) =>{
     const [employees, setemployees] = useState([
         {
             id: Date.now()+1,
-            name: 'Employee 1',
+            name: 'Employee1',
             empid: 1001,
             position: 'Softwware Trainee',
-            gender: 'Male'
+            gender: 'Male',
         },
         {
             id: Date.now()+2,
-            name: 'Employee 2',
+            name: 'Employee2',
             empid: 1002,
             position: 'Softwware Developer',
-            gender: 'Female'
+            gender: 'Female',
         },
         {
             id: Date.now()+3,
-            name: 'Employee 3',
+            name: 'Employee3',
             empid: 1003,
             position: 'Softwware Trainee',
-            gender: 'Male'
+            gender: 'Male',
         },
         {
             id: Date.now()+4,
-            name: 'Employee 4',
+            name: 'Employee4',
             empid: 1004,
             position: 'Softwware Developer',
-            gender: 'Female'
+            gender: 'Female',
+        },
+        {
+            id: Date.now()+5,
+            name: 'Employee5',
+            empid: 1005,
+            position: 'Softwware Developer',
+            gender: 'Male',
+        },
+        {
+            id: Date.now()+6,
+            name: 'Employee6',
+            empid: 1006,
+            position: 'Softwware Developer',
+            gender: 'Female',
         },
     ]);
-    const [tasks, setTasks] = useState({
-        tasktitile: 'Learn Javascript',
-        taskdesc:'Any 5 Topics',
-        empid: 1002,
-        giventime: 60,
-        timeformat:'Min'
-    });
+    const [tasks, setTasks]= useState([])
     
 
     return(
