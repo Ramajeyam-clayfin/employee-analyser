@@ -51,6 +51,7 @@ export default function Manager (){
             console.log('axios finished')
           })
           
+      // eslint-disable-next-line react-hooks/exhaustive-deps
       },[]);
       
       if (loading) {
