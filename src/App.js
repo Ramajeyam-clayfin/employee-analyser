@@ -1,33 +1,34 @@
 import { Routes, Route } from 'react-router-dom';
 import './App.css';
-// import { Nav, Navbar, Container} from 'react-bootstrap'; 
-// import {Link, Outlet} from 'react-router-dom';
+import { DataProvider} from './Components/Context';
 import Login from './Login/Login'
-import { createStore, combineReducers } from 'redux';
+import { createStore } from 'redux';
 import { Provider } from 'react-redux';
 import LoginReducer from './Login/ReduxReducers/LoginReducer';
-import ManagerReducer from './Manager/ReduxReducer/ManagerReducer';
-import EmployeeReducer from './Employee/ReduxReducers/EmployeeReducer';
+// import ManagerReducer from './Manager/ReduxReducer/ManagerReducer';
+// import EmployeeReducer from './Employee/ReduxReducers/EmployeeReducer';
 
-const combinereducers = combineReducers({
-    login: LoginReducer,
-    manager: ManagerReducer,
-    employee: EmployeeReducer
-  });
+// const combinereducers = combineReducers({
+//     login: LoginReducer,
+//     manager: ManagerReducer,
+//     employee: EmployeeReducer
+//   });
 
-const store = createStore( combinereducers, window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__() ); 
+const store = createStore( LoginReducer, window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__() ); 
 
 
 function App() {
   return (
     <Provider store={store}>   
-      <div className="App">
-        <Routes>
-          <Route index element={<Login/>} />
-          <Route />
-          <Route />
-        </Routes>
-      </div>
+      <DataProvider>
+        <div className="App">
+          <Routes>
+            <Route index element={<Login/>} />
+            <Route />
+            <Route />
+          </Routes>
+        </div>
+      </DataProvider>
     </Provider>
   );
 }

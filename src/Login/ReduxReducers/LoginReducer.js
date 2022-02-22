@@ -20,10 +20,13 @@ const initialState = {
                 }
                 
             }
-            break;
+        break;
             
-            case actions.LOGOUT :
-                return { account: 0, username: '', password: '' }
+        case actions.LOGOUT :
+            {
+                // return  [...action.value, { account: 0, username: '', password: '' } ]
+                return {...initialState, };
+            }
         
 
         default:

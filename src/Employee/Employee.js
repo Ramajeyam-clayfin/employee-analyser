@@ -1,11 +1,12 @@
-import React from "react";
-import { useSelector, useDispatch  } from 'react-redux';
+import React, {useContext} from "react";
+import { useDispatch } from 'react-redux';
 import {logout} from '../Login/ReduxReducers/Actions';
+import {Datas} from '../Components/Context';
 import {Button, Container, Row, Col, } from 'react-bootstrap';
 
 export default function Employee (){
     const dispatch = useDispatch();
-    const tasks = useSelector( (state) => state.employee.tasks)
+    const {tasks} = useContext(Datas);
 
     return(
         <div>

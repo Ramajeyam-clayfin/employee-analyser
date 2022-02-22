@@ -7,7 +7,7 @@ import Manager from '../Manager/Manager'
 import './login.css';
 
 export default function Login (){
-    const logindata = useSelector( (state) => state.login.account)
+    const logindata = useSelector( (state) => state.account)
 
     return(
         <>

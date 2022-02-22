@@ -1,15 +1,14 @@
-import React from "react";
+import React, {useContext,} from 'react';
 import {Button, Container, Row, Col, Card } from 'react-bootstrap';
 import Female from '../Images/female.png';
 import Male from '../Images/male.png';
-import { useSelector, useDispatch  } from 'react-redux';
-// import * as actionCreators from './ReduxReducer/Actions';
+import {  useDispatch  } from 'react-redux';
+import {Datas} from '../Components/Context';
 import {logout} from '../Login/ReduxReducers/Actions';
 
 export default function Manager (){
     const dispatch = useDispatch();
-    const emp = useSelector( (state) => state.manager.employees)
-    // console.log(emp)
+    const {employees} = useContext(Datas);
 
     return(
         <div>
@@ -17,7 +16,7 @@ export default function Manager (){
             <hr/>
             <Container>
                     <Row>
-                        {emp.map((s, index) => (
+                        {employees.map((s, index) => (
                             <Col key={index}>
                                 <Card style={{ width: '18rem' }}>
                                     <Card.Img  variant="top" src={(s.gender)==='Male'? Male : Female} style={{height:250}} alt=''/>
