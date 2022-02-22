@@ -7,10 +7,12 @@ import { createStore, combineReducers } from 'redux';
 import { Provider } from 'react-redux';
 import LoginReducer from './Login/ReduxReducers/LoginReducer';
 import ManagerReducer from './Manager/ReduxReducer/ManagerReducer';
+import EmployeeReducer from './Employee/ReduxReducers/EmployeeReducer';
 
 const combinereducers = combineReducers({
     login: LoginReducer,
-    manager: ManagerReducer
+    manager: ManagerReducer,
+    employee: EmployeeReducer
   });
 
 const store = createStore( combinereducers, window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__() ); 
