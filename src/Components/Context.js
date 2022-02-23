@@ -1,4 +1,5 @@
 import React, {createContext, useState} from 'react';
+// import moment from 'moment';
 
 export const Datas = createContext();
 
@@ -10,6 +11,8 @@ export const DataProvider = (props) =>{
             empid: 1001,
             position: 'Softwware Trainee',
             gender: 'Male',
+            percent: 100,
+            color:'success',
         },
         {
             id: Date.now()+2,
@@ -17,6 +20,8 @@ export const DataProvider = (props) =>{
             empid: 1002,
             position: 'Softwware Developer',
             gender: 'Female',
+            color:'success',
+            percent: 100
         },
         {
             id: Date.now()+3,
@@ -24,6 +29,8 @@ export const DataProvider = (props) =>{
             empid: 1003,
             position: 'Softwware Trainee',
             gender: 'Male',
+            color:'success',
+            percent: 100
         },
         {
             id: Date.now()+4,
@@ -31,6 +38,8 @@ export const DataProvider = (props) =>{
             empid: 1004,
             position: 'Softwware Developer',
             gender: 'Female',
+            color:'success',
+            percent: 100
         },
         {
             id: Date.now()+5,
@@ -38,6 +47,8 @@ export const DataProvider = (props) =>{
             empid: 1005,
             position: 'Softwware Developer',
             gender: 'Male',
+            color:'success',
+            percent: 100
         },
         {
             id: Date.now()+6,
@@ -45,9 +56,41 @@ export const DataProvider = (props) =>{
             empid: 1006,
             position: 'Softwware Developer',
             gender: 'Female',
+            color:'success',
+            percent: 100
         },
     ]);
-    const [tasks, setTasks]= useState([])
+    const [tasks, setTasks]= useState([{
+        name: 'Employee6',
+        empid: 1006,
+        tasktitle: 'Learn Javascript',
+        taskdesc:'Any 5 Topics',
+        giventime: 60,
+        finishtime: null,
+        timeformat:'Min',
+        status:'Pending',
+        taskstatus: false,
+        assigndate:'4:00 PM',
+        completedate:'',
+        requests:'a',
+        percent: 100
+        },
+        {
+            name: 'Employee4',
+            empid: 1004,
+            tasktitle: 'Learn Javascript',
+            taskdesc:'Any 5 Topics',
+            giventime: 60,
+            finishtime: null,
+            timeformat:'Min',
+            status:'Pending',
+            taskstatus: false,
+            assigndate:'3:25 PM',
+            completedate:'',
+            requests:'',
+            percent: 100
+        },
+    ])
     
 
     return(
