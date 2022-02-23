@@ -25,6 +25,9 @@ export default function Manager (){
     
     const [localemp, setlocalemp] = useState([]);
 
+    let message = tasks.filter(obj => obj.requests !== '');
+    console.log(message, 'mesage')
+
     const showHide = showB ? "edit display-block" : "edit display-none";
     const Hideshow = showB ?  "edit display-none" : "edit display-block";
     
@@ -35,6 +38,7 @@ export default function Manager (){
         setName(name);
         setId(id);
     }
+
     // var startTime = moment('2:25', 'h:mm');
     // var endTime = moment('3:45', 'h:mm');
   
@@ -87,13 +91,9 @@ export default function Manager (){
             <hr/>
             <h1 >
                 <Button  style={{float:'left', marginLeft:'30px'}} onClick={()=>setShowB(!showB)}> {showB? 'Back' : 'Assigned Tasks'}</Button>
-                    {tasks.map( (obj, index) => ( 
-                        <React.Fragment key={index}>
-                            {obj.requests.length? 
-                            <Button  variant="outline-danger"  onClick={()=>setShowC(true)} style={{float:'right', marginRight:'30px'}}>Unread Requests</Button> 
-                                :  <Button   variant="outline-success" disabled style={{float:'right', marginRight:'30px'}}>No Requests</Button> }
-                        </React.Fragment>
-                    ))}
+                    {message.length? 
+                            <Button  variant="outline-danger"  onClick={()=>setShowC(!showC)} style={{float:'right', marginRight:'30px'}}>Unread Requests</Button> 
+                        :  <Button   variant="outline-success" disabled style={{float:'right', marginRight:'30px'}}>No Requests</Button> }
                 <br/>
             </h1>
 
@@ -136,10 +136,8 @@ export default function Manager (){
                 <Col md={12} className="mb-12">
 
                     <Toast show={showC} onClose={()=>setShowC(false)} className="container-fluid p-4 my-4 "  style={{ width: 'fit-content' }}>
-                        { tasks.map((obj, index) => (
+                        { message.length ?  message.map((obj, index) => (
                             <React.Fragment key={index}>
-                             {obj.requests.length ? 
-                                   <>
                                         <Toast.Header >
                                             <strong className="me-auto">
                                                 <Form.Group as={Row} className="mb-3"  >
@@ -172,10 +170,8 @@ export default function Manager (){
                                                 </Col>
                                             </Form.Group>
                                         </Toast.Body>
-                                    </> 
+                                    </React.Fragment> ) )
                                 :  null } 
-                            </React.Fragment> 
-                        ) )}
                     </Toast>
                 </Col>
             </Container>
@@ -258,8 +254,8 @@ export default function Manager (){
                                         <Card.Title>{s.name}</Card.Title>
                                         <Card.Text>Employee ID : {s.empid}</Card.Text>
                                         <Card.Text>Designation : {s.position}</Card.Text>
-                                        <Card.Text><ProgressBar animated variant={s.color} now={s.percent} label={`${s.percent} %`} /></Card.Text>
-
+                                        <ProgressBar animated variant={s.color} now={s.percent} label={`${s.percent} %`} />
+                                        <Card.Text></Card.Text>
                                         <Button onClick={()=>toggleShowA(s.empid, s.name)} className="mb-2">
                                             Assign task
                                         </Button> 
