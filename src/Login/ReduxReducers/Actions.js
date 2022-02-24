@@ -1,9 +1,11 @@
 import {actions} from './ActionTypes'
 
-export const login = (Items) => {
+export const login = (Items, erroruser, errorpass) => {
     return {
         type: actions.LOGIN,
-        value: Items
+        value: Items,
+        erroruser: erroruser,
+        errorpass: errorpass
     }
 }
 

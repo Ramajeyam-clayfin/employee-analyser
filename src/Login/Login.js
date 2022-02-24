@@ -5,7 +5,7 @@ import * as actionCreators from './ReduxReducers/Actions';
 import { Form,Button, Stack, Container } from 'react-bootstrap'; 
 import Employee from '../Employee/Employee'
 import Manager from '../Manager/Manager'
-
+import { validtaion } from "./Validation";
 
 export default function Login (){
     const logindata = useSelector( (state) => state.account)
@@ -24,12 +24,17 @@ export default function Login (){
 
 const Login1 = () =>{
     const dispatch = useDispatch();
+    const erroruser = useSelector( (state) => state.erroruser)
+    const errorpass = useSelector( (state) => state.errorpass)
     const[values, setValues] = useState({});
 
     const handlelogin = (event) => {
         event.preventDefault();
         setValues(values => ({ ...values   }) );
-        dispatch(actionCreators.login(values));
+        let result= validtaion(values);
+        console.log(result.errormessageuser, 'errormessageuser')
+        console.log(result.errormessagepass, 'errormessagepass')
+        dispatch(actionCreators.login(values , result.errormessageuser, result.errormessagepass));
     }
 
     return(
@@ -44,15 +49,19 @@ const Login1 = () =>{
                         name="username"
                         onChange={(e) =>
                             setValues(values => ({ ...values, username: e.target.value }) ) }
+                        isInvalid={ !!erroruser}
                     />
+                    <Form.Control.Feedback type='invalid' >{erroruser}</Form.Control.Feedback>
                     <br/>
                     <Form.Control 
                         type="password"
                         placeholder="Password"
                         required
+                        isInvalid={ !!errorpass}
                         onChange={(e) =>
                             setValues(values => ({ ...values, password: e.target.value }) ) }
                     />
+                    <Form.Control.Feedback type='invalid' >{errorpass}</Form.Control.Feedback>
                     <br/>
                     <Button type="submit" variant="outline-primary" onClick={(event)=>handlelogin(event)}>Login</Button>
                 </Stack>
