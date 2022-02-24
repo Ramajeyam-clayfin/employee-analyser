@@ -46,16 +46,16 @@ const Login1 = () =>{
         event.preventDefault();
         setValues(values => ({ ...values   }) );
         let result= validtaion(values);
-        console.log(result.errormessageuser, 'errormessageuser')
-        console.log(result.errormessagepass, 'errormessagepass')
+        // console.log(result.errormessageuser, 'errormessageuser')
+        // console.log(result.errormessagepass, 'errormessagepass')
         dispatch(actionCreators.login(values , result.errormessageuser, result.errormessagepass));
     }
 
     return(
         <div >
-            <Container className="container p-5 my-5 border" style={{width:'40%', backgroundColor:'#fff', borderRadius: "10px"}}>
+            <Container className="container p-5 my-5 border" style={{width:'40%', backgroundColor:'#e6e6e6', borderRadius: "10px", boxShadow: '0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19)'}}>
                 <Stack gap={2} >
-                    <Form.Label as="h4">Sign In</Form.Label>
+                    <Form.Label as="h4">SIGN IN</Form.Label>
                     <Form.Control 
                         type="text"
                         placeholder="Username"

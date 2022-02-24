@@ -9,7 +9,7 @@ export const DataProvider = (props) =>{
             id: Date.now()+1,
             name: 'Employee1',
             empid: 1001,
-            position: 'Softwware Trainee',
+            position: 'Software Trainee',
             gender: 'Male',
             percent: 100,
             color:'success',
@@ -18,7 +18,7 @@ export const DataProvider = (props) =>{
             id: Date.now()+2,
             name: 'Employee2',
             empid: 1002,
-            position: 'Softwware Developer',
+            position: 'Software Developer',
             gender: 'Female',
             color:'success',
             percent: 100
@@ -27,7 +27,7 @@ export const DataProvider = (props) =>{
             id: Date.now()+3,
             name: 'Employee3',
             empid: 1003,
-            position: 'Softwware Trainee',
+            position: 'Software Trainee',
             gender: 'Male',
             color:'success',
             percent: 100
@@ -36,7 +36,7 @@ export const DataProvider = (props) =>{
             id: Date.now()+4,
             name: 'Employee4',
             empid: 1004,
-            position: 'Softwware Developer',
+            position: 'Software Developer',
             gender: 'Female',
             color:'success',
             percent: 100
@@ -45,7 +45,7 @@ export const DataProvider = (props) =>{
             id: Date.now()+5,
             name: 'Employee5',
             empid: 1005,
-            position: 'Softwware Developer',
+            position: 'Software Trainee',
             gender: 'Male',
             color:'success',
             percent: 100
@@ -54,7 +54,7 @@ export const DataProvider = (props) =>{
             id: Date.now()+6,
             name: 'Employee6',
             empid: 1006,
-            position: 'Softwware Developer',
+            position: 'Software Developer',
             gender: 'Female',
             color:'success',
             percent: 100
@@ -70,9 +70,9 @@ export const DataProvider = (props) =>{
         timeformat:'Min',
         status:'Pending',
         taskstatus: false,
-        assigndate:'10:10 AM',
+        assigndate:'03:00 PM',
         completedate:'',
-        requests:true,
+        requests:false,
         percent: 100,
         taskid: 1645686727071
         },

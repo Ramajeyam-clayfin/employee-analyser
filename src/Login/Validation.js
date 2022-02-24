@@ -3,8 +3,12 @@ export const validtaion = (value) => {
     let errormessageuser = ''
     let errormessagepass = ''
     // let employeelist =[ "Employee1", "Employee2", "Employee3", "Employee4", "Employee5", "Employee6" ];
-
-    if(value.username.toLowerCase() === 'manager'){
+    // console.log(value.username)
+    if(value.username === undefined || value.password === undefined ){
+        errormessagepass ='Password is Required'
+        errormessageuser = 'Username is Required'
+    }
+    else if(value.username.toLowerCase() === 'manager'){
         if(value.password === 'manager'){
             errormessagepass =''
         }

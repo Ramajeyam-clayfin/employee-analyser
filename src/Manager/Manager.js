@@ -1,7 +1,7 @@
 import React, {useContext, useState, useEffect} from 'react';
 import axios from 'axios';
 import moment from 'moment';
-import {Button, Container, Row, Col, Card, Toast, Form, InputGroup, Spinner, Table,ProgressBar, } from 'react-bootstrap';
+import {Button, Container, Row, Col, Card, Toast, Form, InputGroup, Spinner, Table,ProgressBar,Badge, } from 'react-bootstrap';
 import Female from '../Images/female.png';
 import Male from '../Images/male.png';
 import {  useDispatch  } from 'react-redux';
@@ -89,8 +89,8 @@ export default function Manager (){
             <h1 >
                 <Button  style={{float:'left', marginLeft:'30px'}} onClick={()=>setShowB(!showB)}> {showB? 'Back' : 'Assigned Tasks'}</Button>
                     {message.length? 
-                            <Button  variant="outline-danger"  onClick={()=>setShowC(!showC)} style={{float:'right', marginRight:'30px'}}>Unread Requests</Button> 
-                        :  <Button   variant="outline-success" disabled style={{float:'right', marginRight:'30px'}}>No Requests</Button> }
+                            <Button  variant="outline-danger"  onClick={()=>setShowC(!showC)} style={{float:'right', marginRight:'30px'}}><Badge pill bg="warning" text="danger" >{message.length}</Badge> Requests</Button> 
+                        :  <Button   variant="outline-success" disabled style={{float:'right', marginRight:'30px'}}><Badge bg="success">{message.length}</Badge> Requests</Button> }
                     <Requests show={showC} onHide={()=>setShowC(false)} />
                 <br/>
             </h1>
@@ -129,9 +129,6 @@ export default function Manager (){
                  </Table>
             </Container>
 
-            {/* Container for Displaying the requests */}
-            
-                
             {/* Container for Asigning the tasks  */}
             <Container >
                 <Col md={12} className="mb-12">
@@ -157,7 +154,8 @@ export default function Manager (){
                                         type="text"
                                         placeholder="Task"
                                         required
-                                        autoFocus
+                                        focus={ showA}
+                                        className='input'
                                         name="tasktitle"
                                         onChange={(e) =>
                                             setValues(values => ({ ...values, tasktitle: e.target.value }) ) }
