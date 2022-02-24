@@ -1,31 +1,32 @@
 import React, {useContext, useState, useEffect} from 'react';
 import axios from 'axios';
 import moment from 'moment';
-import {Button, Container, Row, Col, Card, Toast, Form, InputGroup, Spinner, Table,ProgressBar,} from 'react-bootstrap';
+import {Button, Container, Row, Col, Card, Toast, Form, InputGroup, Spinner, Table,ProgressBar, } from 'react-bootstrap';
 import Female from '../Images/female.png';
 import Male from '../Images/male.png';
 import {  useDispatch  } from 'react-redux';
 import {Datas} from '../Components/Context';
 import {logout} from '../Login/ReduxReducers/Actions';
+import { Requests } from './Requests';
 import './edit.css';
 
 export default function Manager (){
     const dispatch = useDispatch();
-    const {tasks, setTasks, employees} = useContext(Datas);
+    const {tasks, setTasks, employees, showC, setShowC} = useContext(Datas);
 
     const [Name, setName] = useState();
     const [Id, setId] = useState();
 
     const [showA, setShowA] = useState(false);
     const [showB, setShowB] = useState(false);
-    const [showC, setShowC] = useState(false);
+    
     const [loading, setloading] = useState(false);
 
     const [values, setValues] = useState({});
     
     const [localemp, setlocalemp] = useState([]);
 
-    let message = tasks.filter(obj => obj.requests !== '');
+    let message = tasks.filter(obj => obj.requests !== false);
     console.log(message, 'mesage')
 
     const showHide = showB ? "edit display-block" : "edit display-none";
@@ -38,12 +39,7 @@ export default function Manager (){
         setName(name);
         setId(id);
     }
-
-    // var startTime = moment('2:25', 'h:mm');
-    // var endTime = moment('3:45', 'h:mm');
-  
-    // var hoursDiff = endTime.diff(startTime, 'minutes');
-    // console.log(hoursDiff);
+    // console.log(moment().format("x"))
     const Additem = (event) => {
         event.preventDefault();
         let push = [ { 
@@ -58,7 +54,8 @@ export default function Manager (){
             taskstatus: false,
             assigndate: moment().format("h:mm a"),
             completedate: '',
-            requests: '' 
+            requests: false,
+            taskid: moment().format("x"), 
             }, ...tasks];
             console.log(push,'push')
         setTasks(push);
@@ -94,6 +91,7 @@ export default function Manager (){
                     {message.length? 
                             <Button  variant="outline-danger"  onClick={()=>setShowC(!showC)} style={{float:'right', marginRight:'30px'}}>Unread Requests</Button> 
                         :  <Button   variant="outline-success" disabled style={{float:'right', marginRight:'30px'}}>No Requests</Button> }
+                    <Requests show={showC} onHide={()=>setShowC(false)} />
                 <br/>
             </h1>
 
@@ -132,50 +130,8 @@ export default function Manager (){
             </Container>
 
             {/* Container for Displaying the requests */}
-            <Container >
-                <Col md={12} className="mb-12">
-
-                    <Toast show={showC} onClose={()=>setShowC(false)} className="container-fluid p-4 my-4 "  style={{ width: 'fit-content' }}>
-                        { message.length ?  message.map((obj, index) => (
-                            <React.Fragment key={index}>
-                                        <Toast.Header >
-                                            <strong className="me-auto">
-                                                <Form.Group as={Row} className="mb-3"  >
-                                                    <Col sm="3">
-                                                        <Form.Control plaintext readOnly value={obj.name} />
-                                                    </Col>
-                                                    <Form.Label column sm="9" style={{textAlign:'left'}}>
-                                                    Has Requested Additional Time.
-                                                    </Form.Label>
-                                                </Form.Group>  
-                                            </strong>     
-                                        </Toast.Header>
-                                        <Toast.Body>
-                                            <Form.Group as={Row} className="mb-2" >
-                                                <Col sm="4">
-                                                    <Form.Select name='time' 
-                                                    // onChange={(e) =>  setValues(values => ({ ...values, timeformat: e.target.value}) ) } 
-                                                    >
-                                                        <option value='15' >15 Min</option>
-                                                        <option value='30'> 30 Min </option>
-                                                        <option value='45'> 45 Min </option>
-                                                        <option value='60'> 60 Min </option>
-                                                    </Form.Select>  
-                                                </Col>
-                                                <Col sm='3'> 
-                                                    <Button size='sm' variant="success">Approve</Button>
-                                                </Col>
-                                                <Col sm='3'>
-                                                    <Button size='sm' variant="danger" >Deny</Button>
-                                                </Col>
-                                            </Form.Group>
-                                        </Toast.Body>
-                                    </React.Fragment> ) )
-                                :  null } 
-                    </Toast>
-                </Col>
-            </Container>
-
+            
+                
             {/* Container for Asigning the tasks  */}
             <Container >
                 <Col md={12} className="mb-12">

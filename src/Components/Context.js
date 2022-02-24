@@ -70,10 +70,11 @@ export const DataProvider = (props) =>{
         timeformat:'Min',
         status:'Pending',
         taskstatus: false,
-        assigndate:'8:00 PM',
+        assigndate:'10:10 AM',
         completedate:'',
-        requests:'a',
-        percent: 100
+        requests:true,
+        percent: 100,
+        taskid: 1645686727071
         },
         {
             name: 'Employee4',
@@ -87,15 +88,16 @@ export const DataProvider = (props) =>{
             taskstatus: false,
             assigndate:'3:25 PM',
             completedate:'',
-            requests:'',
-            percent: 100
+            requests:false,
+            percent: 100,
+            taskid:1645686727080
         },
     ])
-    
+    const [showC, setShowC] = useState(false);
 
     return(
          <div>
-            <Datas.Provider value={{employees, setemployees, tasks, setTasks}} >
+            <Datas.Provider value={{employees, setemployees, tasks, setTasks, showC, setShowC}} >
                 {props.children}
             </Datas.Provider>
          </div>

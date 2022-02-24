@@ -13,7 +13,7 @@ export default function Employee (){
     const [name, setName] = useState();
     const [Id, setId] = useState();
     const [variant, setVariant] = useState('');
-    // const [percent, setPercent] = useState(null);
+    const [percent, setPercent] = useState(null);
 
 
     useEffect(() => {
@@ -28,8 +28,8 @@ export default function Employee (){
                return (
                    setName(value.name),
                    setId(value.empid),
-                   setVariant(value.color)
-                //    setPercent(value.percent)
+                   setVariant(value.color),
+                   setPercent(value.percent)
                    )
             }
             return null
@@ -38,15 +38,39 @@ export default function Employee (){
     // eslint-disable-next-line react-hooks/exhaustive-deps
     },[]);
 
-    const  handlecomplete  = async(id) =>{
+    const handlerequest = (id) =>{
+        const updatedarray = tasks.map((obj) => {
+            if (obj.taskid === id) {
+              obj = { ...obj, 
+                requests: true
+                };
+            }
+            return obj;
+          });
+          setTasks(updatedarray)
+
+          const updated = task.map((obj) => {
+            if (obj.taskid === id) {
+              obj = { ...obj, 
+                requests: true
+                };
+            }
+            return obj;
+          });
+          setTask(updated)
+
+    }
+
+    const  handlecomplete  = (id, empid) =>{
        
-        let calc;
+        let totalcalc = percent;
+        let calc ;
         let minutesDiff;
         let time = moment().format("h:mm a");
         let variant1 = variant
 
         const updates = task.map( (obj) => {
-            if (obj.empid === id) {
+            if (obj.taskid === id) {
                 
                 let startTime = moment(`${obj.assigndate}`, 'h:mm a');
                 let endTime =  moment(`${time}`, 'h:mm a');
@@ -55,11 +79,15 @@ export default function Employee (){
                 if(minutesDiff > obj.giventime){
                     let calc1 = (minutesDiff - obj.giventime)/obj.giventime*100;
                     calc = Math.round(100-calc1);
+                    if(Math.sign(calc) === -1){
+                        calc = 10 ;
+                    }
                 }
                 else {
                     calc = 100;
                    
                 }
+                totalcalc = Math.round((totalcalc + calc)/2)
                 console.log(calc, 'Calc')
               obj = { ...obj, 
                         status:'Completed',
@@ -71,8 +99,9 @@ export default function Employee (){
             return obj;
           });
           setTask(updates)
+
           const updatedarray = tasks.map((obj) => {
-            if (obj.empid === id) {
+            if (obj.taskid === id) {
               obj = { ...obj, 
                 status:'Completed',
                 taskstatus:true,
@@ -94,12 +123,13 @@ export default function Employee (){
             variant1 ='warning';
         }
         console.log(variant1, "Variant")
+
         const empupdate = employees.map( value => {
-            if (value.empid === id){ 
+            if (value.empid === empid){ 
                value = {
                    ...value,
                    color: variant1,
-                   percent: calc
+                   percent: totalcalc
                };
                console.log(value)
             }
@@ -139,8 +169,8 @@ export default function Employee (){
                         <Col>{tasks.assigndate}</Col>
                         <Col>{tasks.giventime} {tasks.timeformat}</Col>
                         <Col>{tasks.status}</Col>
-                        <Col>{!tasks.taskstatus ? <Button size="sm" onClick={()=>handlecomplete(tasks.empid)}> Mark As Complete</Button> : `Completed in: ${tasks.finishtime} Min`}</Col>
-                        <Col><Button size="sm" disabled={tasks.taskstatus}>Request More Time</Button></Col>
+                        <Col>{!tasks.taskstatus ? <Button size="sm" onClick={()=>handlecomplete(tasks.taskid, tasks.empid)}> Mark As Complete</Button> : `Completed in: ${tasks.finishtime} Min`}</Col>
+                        <Col><Button size="sm" onClick={()=>handlerequest(tasks.taskid)} disabled={tasks.taskstatus || tasks.requests}>Request More Time</Button></Col>
                     </Row>
                 )))
                  : <h3><br/><br/>No Tasks Assigned...!!</h3> }
