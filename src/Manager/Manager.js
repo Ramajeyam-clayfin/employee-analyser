@@ -154,7 +154,7 @@ export default function Manager (){
                                         type="text"
                                         placeholder="Task"
                                         required
-                                        focus={ showA}
+                                        focus={showA.toString()}
                                         className='input'
                                         name="tasktitle"
                                         onChange={(e) =>
