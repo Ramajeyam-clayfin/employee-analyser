@@ -42,7 +42,8 @@ export default function Employee (){
         const updatedarray = tasks.map((obj) => {
             if (obj.taskid === id) {
               obj = { ...obj, 
-                requests: true
+                requests: true,
+                requestmsg:'Requested',
                 };
             }
             return obj;
@@ -52,7 +53,8 @@ export default function Employee (){
           const updated = task.map((obj) => {
             if (obj.taskid === id) {
               obj = { ...obj, 
-                requests: true
+                requests: true,
+                requestmsg:'Requested',
                 };
             }
             return obj;
@@ -64,6 +66,7 @@ export default function Employee (){
     const  handlecomplete  = (id, empid) =>{
        
         let totalcalc = percent;
+        let hour;
         let calc ;
         let minutesDiff;
         let time = moment().format("h:mm a");
@@ -75,9 +78,17 @@ export default function Employee (){
                 let startTime = moment(`${obj.assigndate}`, 'h:mm a');
                 let endTime =  moment(`${time}`, 'h:mm a');
                 minutesDiff = endTime.diff(startTime, 'minutes');
-                console.log(minutesDiff, 'diff')
-                if(minutesDiff > obj.giventime){
-                    let calc1 = (minutesDiff - obj.giventime)/obj.giventime*100;
+                
+                if(minutesDiff > 60){
+                    hour = moment('00:00', "hh:mm").add(minutesDiff, 'minutes').format('hh:mm')
+                }
+                console.log(minutesDiff)
+
+                const giventime = moment.duration(moment(obj.giventime, 'HH:mm').format("HH:mm")).asMinutes()
+                console.log(giventime)
+
+                if(minutesDiff > giventime){
+                    let calc1 = (minutesDiff - giventime)/giventime*100;
                     calc = Math.round(100-calc1);
                     if(Math.sign(calc) === -1){
                         calc = 10 ;
@@ -88,12 +99,13 @@ export default function Employee (){
                    
                 }
                 totalcalc = Math.round((totalcalc + calc)/2)
+                
                 console.log(calc, 'Calc')
               obj = { ...obj, 
                         status:'Completed',
                         taskstatus:true,
                         completedate: time,
-                        finishtime: minutesDiff,
+                        finishtime: minutesDiff > 60 ? `${hour} Hrs` : `${minutesDiff} Min`,
                     };
             }
             return obj;
@@ -106,16 +118,16 @@ export default function Employee (){
                 status:'Completed',
                 taskstatus:true,
                 completedate: time, 
-                finishtime: minutesDiff,
+                finishtime: minutesDiff > 60 ? `${hour} Hrs` : `${minutesDiff} Min`,
                 };
             }
             return obj;
           });
           setTasks(updatedarray)
-        if(calc === 100){
+        if(totalcalc === 100){
             variant1 ='success';
 
-        }else if(calc < 50){
+        }else if(totalcalc < 50){
             variant1 ='danger';
         }
              
@@ -129,7 +141,7 @@ export default function Employee (){
                value = {
                    ...value,
                    color: variant1,
-                   percent: totalcalc
+                   percent: totalcalc < 10 ? 10 : totalcalc ,
                };
                console.log(value)
             }
@@ -140,8 +152,8 @@ export default function Employee (){
 
     }
     
-    console.log(task,'task', typeof(task))
-    console.log(tasks,'tasks', typeof(tasks))
+    // console.log(task,'task', typeof(task))
+    // console.log(tasks,'tasks', typeof(tasks))
     return(
         <div>
             <h1>Employee Page <Button onClick={ ()=>dispatch(logout()) } style={{float:'right', marginRight:'30px', marginTop:'10px'}}>Logout</Button></h1>
@@ -158,8 +170,10 @@ export default function Employee (){
                     <Col>Tasks Assigned At</Col> 
                     <Col>Given Time Limit</Col>
                     <Col>Status</Col>
-                    <Col></Col>
-                    <Col></Col>
+                    <Col>Updation</Col>
+                    <Col>Request</Col>
+                    <Col>Request Status</Col>
+                    
                 </Row>
                 { task.length ? 
                     (task.map( (tasks, index ) => (
@@ -169,8 +183,9 @@ export default function Employee (){
                         <Col>{tasks.assigndate}</Col>
                         <Col>{tasks.giventime} {tasks.timeformat}</Col>
                         <Col>{tasks.status}</Col>
-                        <Col>{!tasks.taskstatus ? <Button size="sm" onClick={()=>handlecomplete(tasks.taskid, tasks.empid)}> Mark As Complete</Button> : `Completed in: ${tasks.finishtime} Min`}</Col>
-                        <Col><Button size="sm" onClick={()=>handlerequest(tasks.taskid)} disabled={tasks.taskstatus || tasks.requests}>Request More Time</Button></Col>
+                        <Col>{!tasks.taskstatus ? <Button size="sm" onClick={()=>handlecomplete(tasks.taskid, tasks.empid)}> Mark As Complete</Button> : `Completed in: ${tasks.finishtime}`}</Col>
+                        <Col><Button size="sm" onClick={()=>handlerequest(tasks.taskid)} disabled={tasks.taskstatus || tasks.requestmsg }>Request More Time</Button></Col>
+                        <Col>{!tasks.requestmsg ? (tasks.extraatime === null ? 'N/A' : `${tasks.extraatime} Min Added`) : (tasks.extraatime === null ? <h5 style={{color:'red'}}>{tasks.requestmsg}</h5>  : `${tasks.extraatime} Min Added`)}</Col>
                     </Row>
                 )))
                  : <h3><br/><br/>No Tasks Assigned...!!</h3> }

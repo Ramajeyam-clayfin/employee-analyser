@@ -26,7 +26,7 @@ export default function Manager (){
     
     const [localemp, setlocalemp] = useState([]);
 
-    let message = tasks.filter(obj => obj.requests !== false);
+    let message = tasks.filter(obj => obj.requestmsg === 'Requested');
     console.log(message, 'mesage')
 
     const showHide = showB ? "edit display-block" : "edit display-none";
@@ -56,6 +56,10 @@ export default function Manager (){
             completedate: '',
             requests: false,
             taskid: moment().format("x"), 
+            requestmsg:'',
+            extraatime: null,
+
+            
             }, ...tasks];
             console.log(push,'push')
         setTasks(push);
@@ -120,7 +124,7 @@ export default function Manager (){
                                 <td>{tasks.taskdesc}</td>
                                 <td>{tasks.giventime} {tasks.timeformat}</td>
                                 <td>{tasks.status}</td>
-                                <td>{tasks.finishtime !== null ? `${tasks.finishtime} Min` : 'N/A'} </td>
+                                <td>{tasks.finishtime !== null ? `${tasks.finishtime}` : 'N/A'} </td>
                                 </tr>
                             
                     )))

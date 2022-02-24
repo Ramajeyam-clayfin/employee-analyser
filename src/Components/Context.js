@@ -66,6 +66,7 @@ export const DataProvider = (props) =>{
         tasktitle: 'Learn Javascript',
         taskdesc:'Any 5 Topics',
         giventime: 60,
+        extraatime: null,
         finishtime: null,
         timeformat:'Min',
         status:'Pending',
@@ -73,7 +74,7 @@ export const DataProvider = (props) =>{
         assigndate:'03:00 PM',
         completedate:'',
         requests:false,
-        percent: 100,
+        requestmsg:'Requested',
         taskid: 1645686727071
         },
         {
@@ -83,13 +84,14 @@ export const DataProvider = (props) =>{
             taskdesc:'Any 5 Topics',
             giventime: 60,
             finishtime: null,
+            extraatime: null,
             timeformat:'Min',
             status:'Pending',
             taskstatus: false,
             assigndate:'3:25 PM',
             completedate:'',
             requests:false,
-            percent: 100,
+            requestmsg:'',
             taskid:1645686727080
         },
     ])
