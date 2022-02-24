@@ -9,6 +9,19 @@ import { validtaion } from "./Validation";
 
 export default function Login (){
     const logindata = useSelector( (state) => state.account)
+    // alert(
+    //     ` Username && Password Details :
+    //     For Manager Login:
+    //     username : password
+    //     Manager : manager
+
+    //     For Employee Login:
+    //     Employee1 : employee1
+    //     Employee2 : employee2
+    //     Employee3 : employee3
+    //     Employee4 : employee4
+    //     Employee5 : employee5
+    //     Employee6 : employee6`)
 
     return(
         <>
@@ -27,6 +40,7 @@ const Login1 = () =>{
     const erroruser = useSelector( (state) => state.erroruser)
     const errorpass = useSelector( (state) => state.errorpass)
     const[values, setValues] = useState({});
+    
 
     const handlelogin = (event) => {
         event.preventDefault();
