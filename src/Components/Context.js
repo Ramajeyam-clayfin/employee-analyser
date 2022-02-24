@@ -79,7 +79,7 @@ export const DataProvider = (props) =>{
         {
             name: 'Employee4',
             empid: 1004,
-            tasktitle: 'Learn Javascript',
+            tasktitle: 'Learn React',
             taskdesc:'Any 5 Topics',
             giventime: 60,
             finishtime: null,
