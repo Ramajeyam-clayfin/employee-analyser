@@ -96,10 +96,13 @@ export const DataProvider = (props) =>{
         },
     ])
     const [showC, setShowC] = useState(false);
+    const [showA, setShowA] = useState(false);
+    const [Name, setName] = useState();
+    const [Id, setId] = useState();
 
     return(
          <div>
-            <Datas.Provider value={{employees, setemployees, tasks, setTasks, showC, setShowC}} >
+            <Datas.Provider value={{employees, setemployees, tasks, setTasks, showC, setShowC, showA, setShowA, Name, setName, Id, setId }} >
                 {props.children}
             </Datas.Provider>
          </div>

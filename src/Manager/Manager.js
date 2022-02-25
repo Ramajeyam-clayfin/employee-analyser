@@ -1,30 +1,24 @@
 import React, {useContext, useState, useEffect} from 'react';
 import axios from 'axios';
-import moment from 'moment';
-import {Button, Container, Row, Col, Card, Toast, Form, InputGroup, Spinner, Table,ProgressBar,Badge, } from 'react-bootstrap';
+
+import {Button, Container, Row, Col, Card, Spinner, Table,ProgressBar,Badge, } from 'react-bootstrap';
 import Female from '../Images/female.png';
 import Male from '../Images/male.png';
 import {  useDispatch  } from 'react-redux';
 import {Datas} from '../Components/Context';
 import {logout} from '../Login/ReduxReducers/Actions';
 import { Requests } from './Requests';
-import { TaskValidation } from '../Login/Validation';
+import { AssignTask } from './AssignTask'
+
 import './edit.css';
 
 export default function Manager (){
     const dispatch = useDispatch();
-    const {tasks, setTasks, employees, showC, setShowC} = useContext(Datas);
+    const {tasks, employees, showC, setShowC, showA, setShowA, setName, setId } = useContext(Datas);
 
-    const [Name, setName] = useState();
-    const [Id, setId] = useState();
-    const [error, setError] = useState('');
-
-    const [showA, setShowA] = useState(false);
     const [showB, setShowB] = useState(false);
     
     const [loading, setloading] = useState(false);
-
-    const [values, setValues] = useState({});
     
     const [localemp, setlocalemp] = useState([]);
 
@@ -34,47 +28,13 @@ export default function Manager (){
     const showHide = showB ? "edit display-block" : "edit display-none";
     const Hideshow = showB ?  "edit display-none" : "edit display-block";
     
-    const toggleClose = () => setShowA(!showA);
-
     const toggleShowA = (id, name) => {
         setShowA(true);
         setName(name);
         setId(id);
     }
     // console.log(moment().format("x"))
-    const Additem = (event) => {
-        event.preventDefault();
-        let result = TaskValidation(values);
-
-        if(!result.error)  
-        {
-            let push = [ { 
-                name: Name,
-                empid: Id,
-                tasktitle: values.tasktitle,
-                taskdesc: values.taskdesc,
-                giventime: result.giventime,
-                timeformat: values.timeformat,
-                finishtime: null,
-                status: 'Pending',
-                taskstatus: false,
-                assigndate: moment().format("h:mm a"),
-                completedate: '',
-                requests: false,
-                taskid: moment().format("x"), 
-                requestmsg:'',
-                extraatime: null,
-
-                
-                }, ...tasks];
-                console.log(push,'push')
-            setTasks(push);
-            setError('');
-            setShowA(!showA);
-            setValues({});
-        }
-        else setError(result.error);
-    }
+    
 
     useEffect (() => {
         setloading(true);
@@ -109,7 +69,7 @@ export default function Manager (){
                     <Requests show={showC} onHide={()=>setShowC(false)} />
                 <br/>
             </h1>
-
+            <AssignTask show={showA} onClose={() => setShowA(!showA)} value={{}}/>
             {/* Container for Displaying assigned tasks */}
             <Container className={showHide}>
                 <Table striped bordered hover>
@@ -145,79 +105,7 @@ export default function Manager (){
             </Container>
 
             {/* Container for Asigning the tasks  */}
-            <Container >
-                <Col md={12} className="mb-12">
-
-                    <Toast show={showA} onClose={toggleClose} className="container-fluid p-4 my-4 "  style={{ width: 'fit-content' }}>
-                        <Toast.Header>
-                            <strong className="me-auto">
-                                <Form.Group as={Row} className="mb-3" >
-                                    <Form.Label column sm="3">
-                                        For :
-                                    </Form.Label>
-                                    <Col sm="4">
-                                        <Form.Control plaintext readOnly value={Name} />
-                                    </Col>
-                                    <Form.Label column sm="5">
-                                        {!error ? null  : <p style={{color:'red'}}>{error}</p> }
-                                    </Form.Label>
-                                </Form.Group>  
-                            </strong>
-                                
-                        </Toast.Header>
-                        <Toast.Body>
-                            <Form.Group as={Row} className="mb-2" >
-                                <Col sm="4">
-                                    <Form.Control 
-                                        type="text"
-                                        placeholder="Task"
-                                        required
-                                        focus={showA.toString()}
-                                        className='input'
-                                        name="tasktitle"
-                                        isInvalid={ !!error}
-                                        onChange={(e) =>
-                                            setValues(values => ({ ...values, tasktitle: e.target.value }) ) }
-                                    />
-                                </Col>
-                                <Col sm="4">
-                                    <Form.Control 
-                                        type="text"
-                                        placeholder="Descripition"
-                                        required
-                                        name="description"
-                                        isInvalid={ !!error}
-                                        onChange={(e) =>
-                                            setValues(values => ({ ...values, taskdesc: e.target.value}) ) }
-                                    />
-                                </Col>
-                                <Col sm="3">
-                                    <InputGroup className="mb-3">
-                                        <Form.Control 
-                                            type="number"
-                                            placeholder="Time"
-                                            required
-                                            name="tasktitle"
-                                            isInvalid={ !!error}
-                                            onChange={(e) =>
-                                                setValues(values => ({ ...values, giventime: e.target.value}) ) }
-                                        />
-                                        {/* <Form.Control.Feedback type='invalid' >{error}</Form.Control.Feedback> */}
-                                        <Form.Select name='format' onChange={(e) =>
-                                                setValues(values => ({ ...values, timeformat: e.target.value}) ) } >
-                                            <option value="" >Format</option>
-                                            <option value='Hrs'> Hours </option>
-                                            <option value='Min'> Minutes </option>
-                                        </Form.Select>  
-                                    </InputGroup>
-                                </Col>
-                                
-                            </Form.Group>
-                        </Toast.Body>
-                        <Button size='lg' variant="primary" onClick={Additem}>Assign</Button>
-                    </Toast>
-                </Col>
-            </Container>
+            
 
             {/* Container for Displaying the Employes  */}
             <Container className={Hideshow}>
