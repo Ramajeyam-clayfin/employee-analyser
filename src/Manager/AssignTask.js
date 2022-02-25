@@ -49,23 +49,19 @@ export const AssignTask = (props) => {
             <Container >
                 <Col md={12} className="mb-12">
 
-                    <Toast {...props} className="container-fluid p-4 my-4 "  style={{ width: 'fit-content' }}>
+                    <Toast {...props} className="container-fluid p-4 my-4 "  style={{ width: '90%' }}>
                         <Toast.Header>
-                            <strong className="me-auto">
-                                <Form.Group as={Row} className="mb-3" >
-                                    <Form.Label column sm="3">
+                                    <Form.Label column sm="2">
                                         For :
                                     </Form.Label>
-                                    <Col sm="4">
+                                    <Col sm="3">
                                         <Form.Control plaintext readOnly value={Name} />
                                     </Col>
-                                    <Form.Label column sm="5">
+                                    <Form.Label column sm="6">
                                         {!error ? null  : <p style={{color:'red'}}>{error}</p> }
-                                    </Form.Label>
-                                </Form.Group>  
-                            </strong>
-                                
+                                    </Form.Label>  
                         </Toast.Header>
+                        
                         <Toast.Body>
                             <Form.Group as={Row} className="mb-2" >
                                 <Col sm="4">
@@ -115,7 +111,7 @@ export const AssignTask = (props) => {
                                 
                             </Form.Group>
                         </Toast.Body>
-                        <Button size='lg' variant="primary" onClick={Additem}>Assign</Button>
+                        <Button variant="primary" onClick={Additem}>Assign</Button>
                     </Toast>
                 </Col>
             </Container>

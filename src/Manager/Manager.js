@@ -1,5 +1,6 @@
 import React, {useContext, useState, useEffect} from 'react';
 import axios from 'axios';
+import { useTranslation } from 'react-i18next';
 
 import {Button, Container, Row, Col, Card, Spinner, Table,ProgressBar,Badge, } from 'react-bootstrap';
 import Female from '../Images/female.png';
@@ -13,6 +14,7 @@ import { AssignTask } from './AssignTask'
 import './edit.css';
 
 export default function Manager (){
+    const { t} = useTranslation("Language"); 
     const dispatch = useDispatch();
     const {tasks, employees, showC, setShowC, showA, setShowA, setName, setId } = useContext(Datas);
 
@@ -59,29 +61,31 @@ export default function Manager (){
     else {
     return(
         <div>
-            <h1>Manager Page <Button onClick={ ()=>dispatch(logout()) } style={{float:'right', marginRight:'30px', marginTop:'10px'}}>Logout</Button></h1>
+            <h1>{t("managerheading")}<Button onClick={ ()=>dispatch(logout()) } style={{float:'right', marginRight:'30px', marginTop:'10px'}}>{t("logout")}</Button></h1>
             <hr/>
             <h1 >
-                <Button  style={{float:'left', marginLeft:'30px'}} onClick={()=>setShowB(!showB)}> {showB? 'Back' : 'Assigned Tasks'}</Button>
+                <Button  style={{float:'left', marginLeft:'30px'}} onClick={()=>setShowB(!showB)}> {showB? `${t("Back")}` : `${t("Assigned Tasks")}`}</Button>
                     {message.length? 
-                            <Button  variant="outline-danger"  onClick={()=>setShowC(!showC)} style={{float:'right', marginRight:'30px'}}><Badge pill bg="warning" text="danger" >{message.length}</Badge> Requests</Button> 
-                        :  <Button   variant="outline-success" disabled style={{float:'right', marginRight:'30px'}}><Badge bg="success">{message.length}</Badge> Requests</Button> }
+                            <Button  variant="outline-danger"  onClick={()=>setShowC(!showC)} style={{float:'right', marginRight:'30px'}}><Badge pill bg="warning" text="danger" >{message.length}</Badge>{t("Requests")}</Button> 
+                        :  <Button   variant="outline-success" disabled style={{float:'right', marginRight:'30px'}}><Badge bg="success">{message.length}</Badge>{t("Requests")}</Button> }
                     <Requests show={showC} onHide={()=>setShowC(false)} />
                 <br/>
             </h1>
-            <AssignTask show={showA} onClose={() => setShowA(!showA)} value={{}}/>
+            {/* call the assigntask function if showA is true */}
+            <AssignTask show={showA} onClose={() => setShowA(!showA)}/>
+
             {/* Container for Displaying assigned tasks */}
             <Container className={showHide}>
                 <Table striped bordered hover>
                     <thead>
                         <tr>
-                        <th>Employee Name</th>
-                        <th>Employee ID</th>
-                        <th>Tasks Assigned</th>
-                        <th>Tasks Description</th>
-                        <th>Given Time Limit</th>
-                        <th>Status</th>
-                        <th>Time Taken To Complete</th>
+                        <th>{t("Employee Name")}</th>
+                        <th>{t("Employee ID")}</th>
+                        <th>{t("Tasks Assigned")}</th>
+                        <th>{t("Tasks Description")}</th>
+                        <th>{t("Given Time Limit")}</th>
+                        <th>{t("Status")}</th>
+                        <th>{t("Time Taken To Complete")}</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -99,14 +103,10 @@ export default function Manager (){
                                 </tr>
                             
                     )))
-                    : <h3><br/><br/>No Tasks Assigned...!!</h3> }
+                    : <h3><br/><br/>{t("No Tasks Assigned")}...!!</h3> }
                  </tbody>
                  </Table>
             </Container>
-
-            {/* Container for Asigning the tasks  */}
-            
-
             {/* Container for Displaying the Employes  */}
             <Container className={Hideshow}>
                     <Row>
@@ -116,12 +116,12 @@ export default function Manager (){
                                     <Card.Img  variant="top" src={(s.gender)==='Male'? Male : Female} style={{height:250}} alt=''/>
                                     <Card.Body>
                                         <Card.Title>{s.name}</Card.Title>
-                                        <Card.Text>Employee ID : {s.empid}</Card.Text>
-                                        <Card.Text>Designation : {s.position}</Card.Text>
+                                        <Card.Text>{t("Employee ID")} : {s.empid}</Card.Text>
+                                        <Card.Text>{t("Designation")} : {s.position}</Card.Text>
                                         <ProgressBar animated variant={s.color} now={s.percent} label={`${s.percent} %`} />
                                         <Card.Text></Card.Text>
                                         <Button onClick={()=>toggleShowA(s.empid, s.name)} className="mb-2">
-                                            Assign task
+                                        {t("Assign task")}
                                         </Button> 
                                     </Card.Body>
                                 </Card>

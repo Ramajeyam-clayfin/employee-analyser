@@ -1,7 +1,7 @@
 import  {actions} from './ActionTypes'
 
 const initialState = {
-        account: 2,
+        account: 0,
         username:'',
         password:'',
         erroruser:'',

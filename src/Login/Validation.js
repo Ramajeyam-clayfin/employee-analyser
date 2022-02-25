@@ -73,7 +73,9 @@ export const TaskValidation = (value) => {
                 
             }
             else if(giventime < 24){
-                    giventime = giventime > 9 ? `${giventime}:00` : `0${giventime}:00`
+                let zerohrs = giventime.split('0');
+                let nonzerohrs = !zerohrs[0] ? zerohrs[1] : giventime
+                    giventime = nonzerohrs > 9 ? `${nonzerohrs}:00` : `0${nonzerohrs}:00`
                 }
             else error = 'Time mut be less than 24 Hrs'
         }
@@ -83,6 +85,11 @@ export const TaskValidation = (value) => {
             }
             else if(giventime > 60){
                 error = 'Minutes must be less than 60'
+            }
+            else {
+                let zero = giventime.split('0');
+                let nonsero = !zero[0] ? zero[1] : giventime
+                giventime = nonsero > 9 ? `${nonsero}` : `${nonsero}`
             }
         }
         else if (format === '')

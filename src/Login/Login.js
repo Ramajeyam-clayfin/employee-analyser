@@ -1,4 +1,4 @@
-import React, {useState} from "react";
+import React, {useState, } from "react";
 import './Login.css';
 import { useSelector, useDispatch  } from 'react-redux';
 import * as actionCreators from './ReduxReducers/Actions';
@@ -6,9 +6,16 @@ import { Form,Button, Stack, Container } from 'react-bootstrap';
 import Employee from '../Employee/Employee'
 import Manager from '../Manager/Manager'
 import { validtaion } from "./Validation";
+import { useTranslation } from 'react-i18next'; 
+
 
 export default function Login (){
     const logindata = useSelector( (state) => state.account)
+    const {i18n } = useTranslation("Language");  
+    const changeLanguage = lng => {  
+        i18n.changeLanguage(lng);
+    }
+    
     // alert(
     //     ` Username && Password Details :
     //     For Manager Login:
@@ -25,6 +32,10 @@ export default function Login (){
 
     return(
         <>
+            <div style={{float:'left', margin:'10px'}}> 
+                <Button size='sm' onClick={() => changeLanguage('en')}>English</Button> &nbsp;&nbsp; 
+                <Button  size='sm' onClick={() => changeLanguage('hi')}>Hindi</Button>
+            </div>
            {
             logindata === 0 ? <Login1/> 
                 : logindata === 1 ? <Employee/> 
@@ -40,6 +51,8 @@ const Login1 = () =>{
     const erroruser = useSelector( (state) => state.erroruser)
     const errorpass = useSelector( (state) => state.errorpass)
     const[values, setValues] = useState({});
+    const { t} = useTranslation("Language");  
+    
     
 
     const handlelogin = (event) => {
@@ -52,13 +65,16 @@ const Login1 = () =>{
     }
 
     return(
-        <div >
+        <div>
+            
+            <div>
+                <br/>
             <Container className="container p-5 my-5 border" style={{width:'40%', backgroundColor:'#e6e6e6', borderRadius: "10px", boxShadow: '0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19)'}}>
                 <Stack gap={2} >
-                    <Form.Label as="h4">SIGN IN</Form.Label>
+                    <Form.Label as="h4">{t("label")}</Form.Label>
                     <Form.Control 
                         type="text"
-                        placeholder="Username"
+                        placeholder={t("username")}
                         required
                         name="username"
                         onChange={(e) =>
@@ -69,7 +85,7 @@ const Login1 = () =>{
                     <br/>
                     <Form.Control 
                         type="password"
-                        placeholder="Password"
+                        placeholder={t("password")}
                         required
                         isInvalid={ !!errorpass}
                         onChange={(e) =>
@@ -80,6 +96,7 @@ const Login1 = () =>{
                     <Button type="submit" variant="outline-primary" onClick={(event)=>handlelogin(event)}>Login</Button>
                 </Stack>
             </Container>
+            </div>
         </div>
     );
 }

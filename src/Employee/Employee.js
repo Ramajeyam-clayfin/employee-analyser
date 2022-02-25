@@ -3,9 +3,11 @@ import moment from "moment";
 import { useSelector,useDispatch } from 'react-redux';
 import {logout} from '../Login/ReduxReducers/Actions';
 import {Datas} from '../Components/Context';
+import { useTranslation } from 'react-i18next';
 import {Button, Container, Row, Col, } from 'react-bootstrap';
 
 export default function Employee (){
+    const { t} = useTranslation("Language"); 
     const dispatch = useDispatch();
     const logindata = useSelector( (state) => state.username)
     const {tasks, employees, setTasks, setemployees} = useContext(Datas);
@@ -156,23 +158,23 @@ export default function Employee (){
     // console.log(tasks,'tasks', typeof(tasks))
     return(
         <div>
-            <h1>Employee Page <Button onClick={ ()=>dispatch(logout()) } style={{float:'right', marginRight:'30px', marginTop:'10px'}}>Logout</Button></h1>
+            <h1>{t("Employee Page")} <Button onClick={ ()=>dispatch(logout()) } style={{float:'right', marginRight:'30px', marginTop:'10px'}}>{t("logout")}</Button></h1>
             <hr/>
             <Row as='h4'style={{textAlign:'center', width:'100%', paddingLeft:'10px'}}>
-                <Col>Name : <pre style={{color:'dodgerblue', display:'inline'}}>{name}</pre></Col>
-                <Col> Employee ID : <pre style={{color:'tomato', display:'inline'}}>{Id}</pre></Col>
+                <Col>{t("Name")} : <pre style={{color:'dodgerblue', display:'inline'}}>{name}</pre></Col>
+                <Col>{t("Employee ID")} : <pre style={{color:'tomato', display:'inline'}}>{Id}</pre></Col>
             </Row>
             <hr/>
             <Container>
                 <Row as='h5' style={{borderBottom:'solid', padding:'20px'}}>
-                    <Col>Tasks Assigned</Col>
-                    <Col>Tasks Description</Col>
-                    <Col>Tasks Assigned At</Col> 
-                    <Col>Given Time Limit</Col>
-                    <Col>Status</Col>
-                    <Col>Updation</Col>
-                    <Col>Request</Col>
-                    <Col>Request Status</Col>
+                    <Col>{t("Tasks Assigned")}</Col>
+                    <Col>{t("Tasks Description")}</Col>
+                    <Col>{t("Tasks Assigned At")}</Col> 
+                    <Col>{t("Given Time Limit")}</Col>
+                    <Col>{t("Status")}</Col>
+                    <Col>{t("Updation")}</Col>
+                    <Col>{t("Request")}</Col>
+                    <Col>{t("Request Status")}</Col>
                     
                 </Row>
                 { task.length ? 
@@ -183,12 +185,12 @@ export default function Employee (){
                         <Col>{tasks.assigndate}</Col>
                         <Col>{tasks.giventime} {tasks.timeformat}</Col>
                         <Col>{tasks.status}</Col>
-                        <Col>{!tasks.taskstatus ? <Button size="sm" onClick={()=>handlecomplete(tasks.taskid, tasks.empid)}> Mark As Complete</Button> : `Completed in: ${tasks.finishtime}`}</Col>
-                        <Col><Button size="sm" onClick={()=>handlerequest(tasks.taskid)} disabled={tasks.taskstatus || tasks.requestmsg }>Request More Time</Button></Col>
-                        <Col>{!tasks.requestmsg ? (tasks.extraatime === null ? 'N/A' : `${tasks.extraatime} Min Added`) : (tasks.extraatime === null ? <h5 style={{color:'red'}}>{tasks.requestmsg}</h5>  : `${tasks.extraatime} Min Added`)}</Col>
+                        <Col>{!tasks.taskstatus ? <Button size="sm" onClick={()=>handlecomplete(tasks.taskid, tasks.empid)}> {t("Mark As Complete")}</Button> : `${t('Completed in')}: ${tasks.finishtime}`}</Col>
+                        <Col><Button size="sm" onClick={()=>handlerequest(tasks.taskid)} disabled={tasks.taskstatus || tasks.requestmsg }>{t("Request More Time")}</Button></Col>
+                        <Col>{!tasks.requestmsg ? (tasks.extraatime === null ? 'N/A' : `${tasks.extraatime} ${t("Min Added")}`) : (tasks.extraatime === null ? <h5 style={{color:'red'}}>{tasks.requestmsg}</h5>  : `${tasks.extraatime} ${t("Min Added")}`)}</Col>
                     </Row>
                 )))
-                 : <h3><br/><br/>No Tasks Assigned...!!</h3> }
+                 : <h3><br/><br/>{t("No Tasks Assigned")}...!!</h3> }
             </Container>
         </div>
     );
