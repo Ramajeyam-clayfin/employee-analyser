@@ -1,10 +1,13 @@
-import { Routes, Route } from 'react-router-dom';
+import { Routes, Route,  } from 'react-router-dom';
 import './App.css';
 import { DataProvider} from './Components/Context';
-import Login from './Login/Login'
+import Login from './Login/Login';
+import Employee from './Employee/Employee';
+import Manager from './Manager/Manager';
 import { createStore } from 'redux';
 import { Provider } from 'react-redux';
 import LoginReducer from './Login/ReduxReducers/LoginReducer';
+import PrivateRoute from './Login/PrivateRoute';
 
 
 
@@ -19,6 +22,8 @@ function App() {
       <DataProvider>
         <div className="App">
           <Routes>
+            <Route path="employee" element={<PrivateRoute> <Employee/> </PrivateRoute> }/>
+            <Route path="manager" element={ <PrivateRoute><Manager/> </PrivateRoute> } />
             <Route index element={<Login/>} />
           </Routes>
         </div>

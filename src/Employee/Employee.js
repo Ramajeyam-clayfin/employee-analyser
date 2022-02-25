@@ -5,9 +5,12 @@ import {logout} from '../Login/ReduxReducers/Actions';
 import {Datas} from '../Components/Context';
 import { useTranslation } from 'react-i18next';
 import {Button, Container, Row, Col, } from 'react-bootstrap';
+import { fakeAuth } from "../Login/fakeAuth"
+import { useNavigate } from "react-router-dom"
 
 export default function Employee (){
     const { t} = useTranslation("Language"); 
+    let navigate = useNavigate()
     const dispatch = useDispatch();
     const logindata = useSelector( (state) => state.username)
     const {tasks, employees, setTasks, setemployees} = useContext(Datas);
@@ -154,11 +157,12 @@ export default function Employee (){
 
     }
     
+    //   onClick={ ()=>dispatch(logout()) }
     // console.log(task,'task', typeof(task))
     // console.log(tasks,'tasks', typeof(tasks))
     return(
         <div>
-            <h1>{t("Employee Page")} <Button onClick={ ()=>dispatch(logout()) } style={{float:'right', marginRight:'30px', marginTop:'10px'}}>{t("logout")}</Button></h1>
+            <h1>{t("Employee Page")} <Button onClick={() => { fakeAuth.logout( () => navigate("/", { state: { from: { pathname: "/" } } }) )}} style={{float:'right', marginRight:'30px', marginTop:'10px'}}>{t("logout")}</Button></h1>
             <hr/>
             <Row as='h4'style={{textAlign:'center', width:'100%', paddingLeft:'10px'}}>
                 <Col>{t("Name")} : <pre style={{color:'dodgerblue', display:'inline'}}>{name}</pre></Col>

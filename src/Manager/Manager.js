@@ -10,10 +10,13 @@ import {Datas} from '../Components/Context';
 import {logout} from '../Login/ReduxReducers/Actions';
 import { Requests } from './Requests';
 import { AssignTask } from './AssignTask'
+import { fakeAuth } from "../Login/fakeAuth"
+import { useNavigate } from "react-router-dom"
 
 import './edit.css';
 
 export default function Manager (){
+    let navigate = useNavigate()
     const { t} = useTranslation("Language"); 
     const dispatch = useDispatch();
     const {tasks, employees, showC, setShowC, showA, setShowA, setName, setId } = useContext(Datas);
@@ -61,7 +64,8 @@ export default function Manager (){
     else {
     return(
         <div>
-            <h1>{t("managerheading")}<Button onClick={ ()=>dispatch(logout()) } style={{float:'right', marginRight:'30px', marginTop:'10px'}}>{t("logout")}</Button></h1>
+            {/* onClick={ ()=>dispatch(logout()) } */}
+            <h1>{t("managerheading")}<Button onClick={() => { fakeAuth.logout( () => navigate("/", { state: { from: { pathname: "/" } } }) )}}  style={{float:'right', marginRight:'30px', marginTop:'10px'}}>{t("logout")}</Button></h1>
             <hr/>
             <h1 >
                 <Button  style={{float:'left', marginLeft:'30px'}} onClick={()=>setShowB(!showB)}> {showB? `${t("Back")}` : `${t("Assigned Tasks")}`}</Button>
