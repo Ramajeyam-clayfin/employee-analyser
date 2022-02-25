@@ -156,13 +156,15 @@ export default function Employee (){
             
 
     }
-    
-    //   onClick={ ()=>dispatch(logout()) }
-    // console.log(task,'task', typeof(task))
-    // console.log(tasks,'tasks', typeof(tasks))
+
+    const handlelogout = () =>{
+        dispatch(logout())
+        fakeAuth.logout( () => navigate("/", { state: { from: { pathname: "/" } } }) )
+    }
+
     return(
         <div>
-            <h1>{t("Employee Page")} <Button onClick={() => { fakeAuth.logout( () => navigate("/", { state: { from: { pathname: "/" } } }) )}} style={{float:'right', marginRight:'30px', marginTop:'10px'}}>{t("logout")}</Button></h1>
+            <h1>{t("Employee Page")} <Button onClick={() => handlelogout()} style={{float:'right', marginRight:'30px', marginTop:'10px'}}>{t("logout")}</Button></h1>
             <hr/>
             <Row as='h4'style={{textAlign:'center', width:'100%', paddingLeft:'10px'}}>
                 <Col>{t("Name")} : <pre style={{color:'dodgerblue', display:'inline'}}>{name}</pre></Col>

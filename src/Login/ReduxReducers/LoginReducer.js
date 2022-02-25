@@ -5,7 +5,8 @@ const initialState = {
         username:'',
         password:'',
         erroruser:'',
-        errorpass:''
+        errorpass:'',
+        isAuthenticated: false,
 };
   
  const LoginReducer = (state = initialState, action) => {
@@ -14,6 +15,7 @@ const initialState = {
         case actions.LOGIN :
             // eslint-disable-next-line no-lone-blocks
             {
+                
                 if(action.erroruser === '' && action.errorpass === '' ){
                     if(action.value.username.toLowerCase() === 'manager'){
                         return  { account: 2, username: action.value.username, password: action.value.password, erroruser: action.erroruser, errorpass:action.errorpass }
@@ -28,10 +30,16 @@ const initialState = {
         
             
         case actions.LOGOUT :
+            {
+                
                 return {...initialState}
-        
+
+            }
+
         default:
             return state;
     }
   };
   export default LoginReducer;
+
+  

@@ -1,32 +1,32 @@
-import React from "react";
-import './Login.css';
+import React,{useEffect} from "react";
 import { useSelector  } from 'react-redux';
-import { useNavigate, useLocation } from "react-router-dom"
+import { useNavigate } from "react-router-dom"
 import { Login1 } from "./Login1";
 import { fakeAuth } from "./fakeAuth"
 
 
 export default function Login (){
     let navigate = useNavigate()
-    let location = useLocation()
-  
-    let { from } = location.state || { from: { pathname: "/" } }
-    console.log(from)
+
     const logindata = useSelector( (state) => state) 
     
+    useEffect (() => {
+        if(!logindata.errormessageuser || !logindata.errormessagepass){
+            if(logindata.account === 1){
+               fakeAuth.login(() => { navigate(`employee/${logindata.username.toLowerCase()}`) });
+           } else if(logindata.account === 2){
+               fakeAuth.login(() => {navigate(`/${logindata.username.toLowerCase()}`) });
+           }else return <Login1/>
+       }else return <Login1/>
+          
+      // eslint-disable-next-line react-hooks/exhaustive-deps
+      },[logindata]);
 
-    if(!logindata.errormessageuser || !logindata.errormessagepass){
-         if(logindata.account === 1){
-            fakeAuth.login(() => { navigate(`/employee`) });
-        } else if(logindata.account === 2){
-            fakeAuth.login(() => {navigate(`/${logindata.username.toLowerCase()}`) });
-        }else return <Login1/>
-    }else return <Login1/>
+    
 
     return(
         <>
             <Login1/>
-          
         </>
     );
 } 

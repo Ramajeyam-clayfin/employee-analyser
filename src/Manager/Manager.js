@@ -57,6 +57,10 @@ export default function Manager (){
           
       // eslint-disable-next-line react-hooks/exhaustive-deps
       },[]);
+      const handlelogout = () =>{
+        dispatch(logout())
+        fakeAuth.logout( () => navigate("/", { state: { from: { pathname: "/" } } }) )
+    }
       
       if (loading) {
         return <div style={{position:'absolute', top:'50%', width:'100%'}}><Spinner animation="border" /></div>
@@ -64,8 +68,7 @@ export default function Manager (){
     else {
     return(
         <div>
-            {/* onClick={ ()=>dispatch(logout()) } */}
-            <h1>{t("managerheading")}<Button onClick={() => { fakeAuth.logout( () => navigate("/", { state: { from: { pathname: "/" } } }) )}}  style={{float:'right', marginRight:'30px', marginTop:'10px'}}>{t("logout")}</Button></h1>
+            <h1>{t("managerheading")}<Button onClick={() => handlelogout() }  style={{float:'right', marginRight:'30px', marginTop:'10px'}}>{t("logout")}</Button></h1>
             <hr/>
             <h1 >
                 <Button  style={{float:'left', marginLeft:'30px'}} onClick={()=>setShowB(!showB)}> {showB? `${t("Back")}` : `${t("Assigned Tasks")}`}</Button>

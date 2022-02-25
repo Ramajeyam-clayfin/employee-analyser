@@ -1,5 +1,4 @@
 import React, {useState, } from "react";
-import './Login.css';
 import { useSelector, useDispatch  } from 'react-redux';
 import * as actionCreators from './ReduxReducers/Actions';
 import { Form,Button, Stack, Container } from 'react-bootstrap'; 
@@ -11,30 +10,22 @@ export const Login1 = () =>{
     const erroruser = useSelector( (state) => state.erroruser)
     const errorpass = useSelector( (state) => state.errorpass)
     const[values, setValues] = useState({});
-    const { t, i18n} = useTranslation("Language");  
+    const { t, } = useTranslation("Language");  
     
     
 
-    const handlelogin = async(event) => {
+    const handlelogin = (event) => {
         // event.preventDefault();
         setValues(values => ({ ...values   }) );
         let result= validtaion(values);
-        
-        await dispatch(actionCreators.login(values , result.errormessageuser, result.errormessagepass));
+
+        dispatch(actionCreators.login(values , result.errormessageuser, result.errormessagepass));
 
     }
-    const changeLanguage = lng => {  
-        i18n.changeLanguage(lng);
-    }
+    
 
     return(
         <div>
-            
-            <div style={{float:'left', margin:'10px'}}> 
-                <Button size='sm' onClick={() => changeLanguage('en')}>English</Button> &nbsp;&nbsp; 
-                <Button  size='sm' onClick={() => changeLanguage('hi')}>Hindi</Button>
-            </div>
-            
             <div>
                 <br/>
             <Container className="container p-5 my-5 border" style={{width:'40%', backgroundColor:'#e6e6e6', borderRadius: "10px", boxShadow: '0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19)'}}>
@@ -61,7 +52,7 @@ export const Login1 = () =>{
                     />
                     <Form.Control.Feedback type='invalid' >{errorpass}</Form.Control.Feedback>
                     <br/>
-                    <Button type="submit" variant="outline-primary" onClick={(event)=>handlelogin(event)}>Login</Button>
+                    <Button type="submit" variant="outline-primary" onClick={(event)=>handlelogin(event)}>{t("Login")}</Button>
                 </Stack>
             </Container>
             </div>

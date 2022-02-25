@@ -8,6 +8,8 @@ import { createStore } from 'redux';
 import { Provider } from 'react-redux';
 import LoginReducer from './Login/ReduxReducers/LoginReducer';
 import PrivateRoute from './Login/PrivateRoute';
+import { useTranslation } from 'react-i18next';
+import { Button,  } from 'react-bootstrap'; 
 
 
 
@@ -15,20 +17,28 @@ const store = createStore( LoginReducer, window.__REDUX_DEVTOOLS_EXTENSION__ && 
 
 
 function App() {
+  const { i18n} = useTranslation("Language"); 
+  const changeLanguage = lng => {  
+    i18n.changeLanguage(lng);
+}
   return (
     // for redux store 
-    <Provider store={store}>  
-    {/* for Usecontext   */}
-      <DataProvider>
-        <div className="App">
-          <Routes>
-            <Route path="employee" element={<PrivateRoute> <Employee/> </PrivateRoute> }/>
-            <Route path="manager" element={ <PrivateRoute><Manager/> </PrivateRoute> } />
-            <Route index element={<Login/>} />
-          </Routes>
-        </div>
-      </DataProvider>
-    </Provider>
+    <div className="App">
+      <div style={{float:'left', margin:'10px'}}> 
+          <Button size='sm' onClick={() => changeLanguage('en')}>English</Button> &nbsp;&nbsp; 
+          <Button  size='sm' onClick={() => changeLanguage('hi')}>Hindi</Button>
+      </div>
+      <Provider store={store}>  
+      {/* for Usecontext   */}
+        <DataProvider>
+            <Routes>
+              <Route index element={<Login/>} />
+              <Route path="/employee/*" element={<PrivateRoute> <Employee/> </PrivateRoute> }/>
+              <Route path="/manager" element={ <PrivateRoute> <Manager/> </PrivateRoute> } />
+            </Routes>
+        </DataProvider>
+      </Provider>
+    </div>
   );
 }
 
