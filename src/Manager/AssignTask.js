@@ -16,26 +16,25 @@ export const AssignTask = (props) => {
 
         if(!result.error)  
         {
-            let push = [ { 
-                name: Name,
-                empid: Id,
-                tasktitle: values.tasktitle,
-                taskdesc: values.taskdesc,
-                giventime: result.giventime,
-                timeformat: values.timeformat,
-                finishtime: null,
-                status: 'Pending',
-                taskstatus: false,
-                assigndate: moment().format("h:mm a"),
-                completedate: '',
-                requests: false,
-                taskid: moment().format("x"), 
-                requestmsg:'',
-                extraatime: null,
-
-                
+            let push = [ 
+                { 
+                    name: Name,
+                    empid: Id,
+                    tasktitle: values.tasktitle,
+                    taskdesc: values.taskdesc,
+                    giventime: result.giventime,
+                    timeformat: values.timeformat,
+                    finishtime: null,
+                    status: 'Pending',
+                    taskstatus: false,
+                    assigndate: moment().format("h:mm a"),
+                    completedate: '',
+                    requests: false,
+                    taskid: moment().format("x"), 
+                    requestmsg:'',
+                    extraatime: null,
                 }, ...tasks];
-                console.log(push,'push')
+            console.log(push,'push')
             setTasks(push);
             setError('');
             setShowA(!showA);
@@ -48,18 +47,17 @@ export const AssignTask = (props) => {
         <div>
             <Container >
                 <Col md={12} className="mb-12">
-
                     <Toast {...props} className="container-fluid p-4 my-4 "  style={{ width: '90%' }}>
                         <Toast.Header>
-                                    <Form.Label column sm="2">
-                                        For :
-                                    </Form.Label>
-                                    <Col sm="3">
-                                        <Form.Control plaintext readOnly value={Name} />
-                                    </Col>
-                                    <Form.Label column sm="6">
-                                        {!error ? null  : <p style={{color:'red'}}>{error}</p> }
-                                    </Form.Label>  
+                                <Form.Label column sm="2">
+                                    For :
+                                </Form.Label>
+                                <Col sm="3">
+                                    <Form.Control plaintext readOnly value={Name} />
+                                </Col>
+                                <Form.Label column sm="6">
+                                    {!error ? null  : <p style={{color:'red'}}>{error}</p> }
+                                </Form.Label>  
                         </Toast.Header>
                         
                         <Toast.Body>

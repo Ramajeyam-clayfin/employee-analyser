@@ -6,7 +6,6 @@ const initialState = {
         password:'',
         erroruser:'',
         errorpass:'',
-        isAuthenticated: false,
 };
   
  const LoginReducer = (state = initialState, action) => {
@@ -15,20 +14,36 @@ const initialState = {
         case actions.LOGIN :
             // eslint-disable-next-line no-lone-blocks
             {
-                
                 if(action.erroruser === '' && action.errorpass === '' ){
                     if(action.value.username.toLowerCase() === 'manager'){
-                        return  { account: 2, username: action.value.username, password: action.value.password, erroruser: action.erroruser, errorpass:action.errorpass }
+                        return  { 
+                            account: 2, 
+                            username: action.value.username, 
+                            password: action.value.password, 
+                            erroruser: action.erroruser, 
+                            errorpass:action.errorpass 
+                        }
                     }
                     else {
-                        return { account: 1, username: action.value.username, password: action.value.password, erroruser: action.erroruser, errorpass:action.errorpass }
+                        return { 
+                            account: 1, 
+                            username: action.value.username, 
+                            password: action.value.password, 
+                            erroruser: action.erroruser, 
+                            errorpass:action.errorpass 
+                        }
                     }
                 }
-                else return { account: 0, username: action.value.username, password: action.value.password, erroruser: action.erroruser, errorpass:action.errorpass }
+                else return { 
+                    account: 0, 
+                    username: action.value.username, 
+                    password: action.value.password, 
+                    erroruser: action.erroruser, 
+                    errorpass:action.errorpass 
+                }
                 
             }
-        
-            
+
         case actions.LOGOUT :
             {
                 

@@ -70,40 +70,40 @@ export default function Employee (){
 
     const  handlecomplete  = (id, empid) =>{
        
-        let totalcalc = percent;
-        let hour;
+        let totalcalc = percent; //for percantage calculation
+        let hour; 
         let calc ;
-        let minutesDiff;
-        let time = moment().format("h:mm a");
-        let variant1 = variant
+        let minutesDiff; // for completion time calculation
+        let time = moment().format("h:mm a"); //for current time
+        let variant1 = variant //for color in percentage bar
 
         const updates = task.map( (obj) => {
             if (obj.taskid === id) {
                 
-                let startTime = moment(`${obj.assigndate}`, 'h:mm a');
-                let endTime =  moment(`${time}`, 'h:mm a');
-                minutesDiff = endTime.diff(startTime, 'minutes');
+                let startTime = moment(`${obj.assigndate}`, 'h:mm a'); //converting the task asign time to format of h:mm a
+                let endTime =  moment(`${time}`, 'h:mm a'); // converting the task completed time to format of h:mm a
+                minutesDiff = endTime.diff(startTime, 'minutes'); //calculate the minutes between starttime and endtime 
                 
-                if(minutesDiff > 60){
+                if(minutesDiff > 60){ // if time taken is greater than 60 means we converting minutes into hours
                     hour = moment('00:00', "hh:mm").add(minutesDiff, 'minutes').format('hh:mm')
                 }
                 console.log(minutesDiff)
 
-                const giventime = moment.duration(moment(obj.giventime, 'HH:mm').format("HH:mm")).asMinutes()
+                const giventime = moment.duration(moment(obj.giventime, 'HH:mm').format("HH:mm")).asMinutes() // it will converts the given time to minutes
                 console.log(giventime)
 
-                if(minutesDiff > giventime){
-                    let calc1 = (minutesDiff - giventime)/giventime*100;
-                    calc = Math.round(100-calc1);
-                    if(Math.sign(calc) === -1){
-                        calc = 10 ;
+                if(minutesDiff > giventime){ //here we check the time taken to complete the task is greater than the given time
+                    let calc1 = (minutesDiff - giventime)/giventime*100; //calculating the percentage (time taken / given time)/ giventime x 100
+                    calc = Math.round(100-calc1); // calc1 is minus by 100 remaining value is our percentage
+                    if(Math.sign(calc) === -1){ // if percentage contains negative value means assigning as lowest percentage of 10%
+                        calc = 10 ; 
                     }
                 }
-                else {
+                else { //if the time taken is less than given time means percentage will be 100%
                     calc = 100;
                    
                 }
-                totalcalc = Math.round((totalcalc + calc)/2)
+                totalcalc = Math.round((totalcalc + calc)/2) // previous percentage and cuurent percentage is tallyed
                 
                 console.log(calc, 'Calc')
               obj = { ...obj, 
@@ -153,8 +153,6 @@ export default function Employee (){
             return value;
             })
             setemployees(empupdate)
-            
-
     }
 
     const handlelogout = () =>{

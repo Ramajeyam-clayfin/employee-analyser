@@ -16,15 +16,15 @@ import { useNavigate } from "react-router-dom"
 import './edit.css';
 
 export default function Manager (){
+
     let navigate = useNavigate()
     const { t} = useTranslation("Language"); 
+
     const dispatch = useDispatch();
     const {tasks, employees, showC, setShowC, showA, setShowA, setName, setId } = useContext(Datas);
 
     const [showB, setShowB] = useState(false);
-    
     const [loading, setloading] = useState(false);
-    
     const [localemp, setlocalemp] = useState([]);
 
     let message = tasks.filter(obj => obj.requestmsg === 'Requested');
@@ -38,8 +38,6 @@ export default function Manager (){
         setName(name);
         setId(id);
     }
-    // console.log(moment().format("x"))
-    
 
     useEffect (() => {
         setloading(true);
@@ -57,12 +55,13 @@ export default function Manager (){
           
       // eslint-disable-next-line react-hooks/exhaustive-deps
       },[]);
-      const handlelogout = () =>{
+
+    const handlelogout = () =>{
         dispatch(logout())
         fakeAuth.logout( () => navigate("/", { state: { from: { pathname: "/" } } }) )
     }
       
-      if (loading) {
+    if (loading) {
         return <div style={{position:'absolute', top:'50%', width:'100%'}}><Spinner animation="border" /></div>
      }
     else {
@@ -73,9 +72,17 @@ export default function Manager (){
             <h1 >
                 <Button  style={{float:'left', marginLeft:'30px'}} onClick={()=>setShowB(!showB)}> {showB? `${t("Back")}` : `${t("Assigned Tasks")}`}</Button>
                     {message.length? 
-                            <Button  variant="outline-danger"  onClick={()=>setShowC(!showC)} style={{float:'right', marginRight:'30px'}}><Badge pill bg="warning" text="danger" >{message.length}</Badge>{t("Requests")}</Button> 
-                        :  <Button   variant="outline-success" disabled style={{float:'right', marginRight:'30px'}}><Badge bg="success">{message.length}</Badge>{t("Requests")}</Button> }
-                    <Requests show={showC} onHide={()=>setShowC(false)} />
+                            <Button variant="outline-danger"  onClick={()=>setShowC(!showC)} style={{float:'right', marginRight:'30px'}}>
+                                <Badge pill bg="warning" text="danger" >{message.length}</Badge>
+                                {t("Requests")}
+                            </Button> 
+                        :  <Button variant="outline-success" disabled style={{float:'right', marginRight:'30px'}}>
+                                <Badge bg="success">{message.length}</Badge>
+                                {t("Requests")}
+                            </Button> 
+                    }
+                {/* call the requests function if showC is true */}
+                <Requests show={showC} onHide={()=>setShowC(false)} />
                 <br/>
             </h1>
             {/* call the assigntask function if showA is true */}
@@ -114,6 +121,7 @@ export default function Manager (){
                  </tbody>
                  </Table>
             </Container>
+
             {/* Container for Displaying the Employes  */}
             <Container className={Hideshow}>
                     <Row>
