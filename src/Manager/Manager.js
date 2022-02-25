@@ -8,6 +8,7 @@ import {  useDispatch  } from 'react-redux';
 import {Datas} from '../Components/Context';
 import {logout} from '../Login/ReduxReducers/Actions';
 import { Requests } from './Requests';
+import { TaskValidation } from '../Login/Validation';
 import './edit.css';
 
 export default function Manager (){
@@ -16,6 +17,7 @@ export default function Manager (){
 
     const [Name, setName] = useState();
     const [Id, setId] = useState();
+    const [error, setError] = useState('');
 
     const [showA, setShowA] = useState(false);
     const [showB, setShowB] = useState(false);
@@ -42,29 +44,38 @@ export default function Manager (){
     // console.log(moment().format("x"))
     const Additem = (event) => {
         event.preventDefault();
-        let push = [ { 
-            name: Name,
-            empid: Id,
-            tasktitle: values.tasktitle,
-            taskdesc: values.taskdesc,
-            giventime: values.giventime,
-            timeformat: values.timeformat,
-            finishtime: null,
-            status: 'Pending',
-            taskstatus: false,
-            assigndate: moment().format("h:mm a"),
-            completedate: '',
-            requests: false,
-            taskid: moment().format("x"), 
-            requestmsg:'',
-            extraatime: null,
+        let result = TaskValidation(values);
 
-            
-            }, ...tasks];
-            console.log(push,'push')
-        setTasks(push);
-        setShowA(!showA);
+        if(!result.error)  
+        {
+            let push = [ { 
+                name: Name,
+                empid: Id,
+                tasktitle: values.tasktitle,
+                taskdesc: values.taskdesc,
+                giventime: result.giventime,
+                timeformat: values.timeformat,
+                finishtime: null,
+                status: 'Pending',
+                taskstatus: false,
+                assigndate: moment().format("h:mm a"),
+                completedate: '',
+                requests: false,
+                taskid: moment().format("x"), 
+                requestmsg:'',
+                extraatime: null,
+
+                
+                }, ...tasks];
+                console.log(push,'push')
+            setTasks(push);
+            setError('');
+            setShowA(!showA);
+            setValues({});
+        }
+        else setError(result.error);
     }
+
     useEffect (() => {
         setloading(true);
         console.log('axios start')
@@ -144,9 +155,12 @@ export default function Manager (){
                                     <Form.Label column sm="3">
                                         For :
                                     </Form.Label>
-                                    <Col sm="6">
+                                    <Col sm="4">
                                         <Form.Control plaintext readOnly value={Name} />
                                     </Col>
+                                    <Form.Label column sm="5">
+                                        {!error ? null  : <p style={{color:'red'}}>{error}</p> }
+                                    </Form.Label>
                                 </Form.Group>  
                             </strong>
                                 
@@ -161,6 +175,7 @@ export default function Manager (){
                                         focus={showA.toString()}
                                         className='input'
                                         name="tasktitle"
+                                        isInvalid={ !!error}
                                         onChange={(e) =>
                                             setValues(values => ({ ...values, tasktitle: e.target.value }) ) }
                                     />
@@ -171,6 +186,7 @@ export default function Manager (){
                                         placeholder="Descripition"
                                         required
                                         name="description"
+                                        isInvalid={ !!error}
                                         onChange={(e) =>
                                             setValues(values => ({ ...values, taskdesc: e.target.value}) ) }
                                     />
@@ -182,9 +198,11 @@ export default function Manager (){
                                             placeholder="Time"
                                             required
                                             name="tasktitle"
+                                            isInvalid={ !!error}
                                             onChange={(e) =>
                                                 setValues(values => ({ ...values, giventime: e.target.value}) ) }
                                         />
+                                        {/* <Form.Control.Feedback type='invalid' >{error}</Form.Control.Feedback> */}
                                         <Form.Select name='format' onChange={(e) =>
                                                 setValues(values => ({ ...values, timeformat: e.target.value}) ) } >
                                             <option value="" >Format</option>
