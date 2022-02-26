@@ -10,6 +10,7 @@ import LoginReducer from './Login/ReduxReducers/LoginReducer';
 import PrivateRoute from './Login/PrivateRoute';
 import { useTranslation } from 'react-i18next';
 import { Button,  } from 'react-bootstrap'; 
+import { Performance } from './Manager/Performance';
 
 
 
@@ -35,6 +36,7 @@ function App() {
               <Route index element={<Login/>} />
               <Route path="/employee/*" element={<PrivateRoute> <Employee/> </PrivateRoute> }/>
               <Route path="/manager" element={ <PrivateRoute> <Manager/> </PrivateRoute> } />
+              <Route path="/manager/performance" element={<Performance/>}/>
             </Routes>
         </DataProvider>
       </Provider>
