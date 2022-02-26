@@ -6,8 +6,11 @@ export const metadata =[
         empid: 1001,
         position: 'Software Trainee',
         gender: 'Male',
-        percent: 100,
+        percent: 80,
         color:'success',
+        totaltasks: 0,
+        pending: 0,
+        completed: 0,
     },
     {
         id: Date.now()+2,
@@ -16,7 +19,10 @@ export const metadata =[
         position: 'Software Developer',
         gender: 'Female',
         color:'success',
-        percent: 100
+        percent: 100,
+        totaltasks: 0,
+        pending: 0,
+        completed: 0,
     },
     {
         id: Date.now()+3,
@@ -25,7 +31,10 @@ export const metadata =[
         position: 'Software Trainee',
         gender: 'Male',
         color:'success',
-        percent: 100
+        percent: 100,
+        totaltasks: 0,
+        pending: 0,
+        completed: 0,
     },
     {
         id: Date.now()+4,
@@ -34,7 +43,10 @@ export const metadata =[
         position: 'Software Developer',
         gender: 'Female',
         color:'success',
-        percent: 100
+        percent: 100,
+        totaltasks: 0,
+        pending: 0,
+        completed: 0,
     },
     {
         id: Date.now()+5,
@@ -43,7 +55,10 @@ export const metadata =[
         position: 'Software Trainee',
         gender: 'Male',
         color:'success',
-        percent: 100
+        percent: 100,
+        totaltasks: 0,
+        pending: 0,
+        completed: 0,
     },
     {
         id: Date.now()+6,
@@ -52,6 +67,9 @@ export const metadata =[
         position: 'Software Developer',
         gender: 'Female',
         color:'success',
-        percent: 100
+        percent: 100,
+        totaltasks: 0,
+        pending: 0,
+        completed: 0,
     },
 ]

@@ -145,9 +145,11 @@ export default function Employee (){
         const empupdate = employees.map( value => {
             if (value.empid === empid){ 
                value = {
-                   ...value,
-                   color: variant1,
-                   percent: totalcalc < 10 ? 10 : totalcalc ,
+                    ...value,
+                    color: variant1,
+                    percent: totalcalc < 10 ? 10 : totalcalc ,
+                    pending: value.pending - 1,
+                    completed: value.completed + 1,
                };
                console.log(value)
             }

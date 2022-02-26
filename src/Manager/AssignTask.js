@@ -7,7 +7,7 @@ import { useTranslation } from 'react-i18next';
 
 export const AssignTask = (props) => {
     const { t, } = useTranslation("Language"); 
-    const {tasks, setTasks, setShowA, showA, Name, Id } = useContext(Datas);
+    const {tasks, employees, setTasks, setShowA, showA, Name, Id, setemployees, } = useContext(Datas);
 
     const [error, setError] = useState('');
     const [values, setValues] = useState({});
@@ -38,6 +38,18 @@ export const AssignTask = (props) => {
                 }, ...tasks];
             console.log(push,'push')
             setTasks(push);
+
+            const empupdate = employees.map( value => {
+                if (value.empid === Id){ 
+                   value = {
+                        ...value,
+                        pending: value.pending + 1,
+                        totaltasks: value.totaltasks + 1,
+                   };
+                }
+                return value;
+            })
+            setemployees(empupdate);
             setError('');
             setShowA(!showA);
             setValues({});

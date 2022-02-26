@@ -43,6 +43,23 @@ export const DataProvider = (props) =>{
             requestmsg:'',
             taskid:1645686727080
         },
+        {
+            name: 'Employee4',
+            empid: 1004,
+            tasktitle: 'Learn React',
+            taskdesc:'Any 5 Topics',
+            giventime: 60,
+            finishtime: null,
+            extraatime: null,
+            timeformat:'Min',
+            status:'Pending',
+            taskstatus: false,
+            assigndate:'3:25 PM',
+            completedate:'',
+            requests:false,
+            requestmsg:'',
+            taskid:1645686727081
+        },
     ])
  
 
