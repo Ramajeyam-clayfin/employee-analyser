@@ -9,7 +9,7 @@ import { fakeAuth } from "../Login/fakeAuth"
 import { useNavigate } from "react-router-dom"
 
 export default function Employee (){
-    const { t} = useTranslation("Language"); 
+    const { t, i18n} = useTranslation("Language"); 
     let navigate = useNavigate()
     const dispatch = useDispatch();
     const logindata = useSelector( (state) => state.username)
@@ -22,6 +22,7 @@ export default function Employee (){
 
 
     useEffect(() => {
+        i18n.changeLanguage('en');
         tasks.map( value => {
         if (value.name.toLowerCase() === logindata.toLowerCase()){ 
            return setTask(task => ([...task,  value ]))

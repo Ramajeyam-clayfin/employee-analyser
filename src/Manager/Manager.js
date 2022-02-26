@@ -18,7 +18,7 @@ import './edit.css';
 export default function Manager (){
 
     let navigate = useNavigate()
-    const { t} = useTranslation("Language"); 
+    const { t, i18n} = useTranslation("Language"); 
 
     const dispatch = useDispatch();
     const {tasks, employees, showC, setShowC, showA, setShowA, setName, setId } = useContext(Datas);
@@ -40,6 +40,7 @@ export default function Manager (){
     }
 
     useEffect (() => {
+        i18n.changeLanguage('en');
         setloading(true);
         console.log('axios start')
         

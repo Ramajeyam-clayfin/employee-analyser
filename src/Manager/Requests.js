@@ -1,10 +1,12 @@
 import React, {useContext, useState} from "react";
 import {Datas} from '../Components/Context';
 import moment from "moment";
+import { useTranslation } from 'react-i18next';
 import {Button, Container, Row, Col, Form, Modal,} from 'react-bootstrap';
 
 export const Requests = (props) => {
 
+    const { t, } = useTranslation("Language"); 
     const {tasks, setTasks, setShowC} = useContext(Datas);
     let message = tasks.filter(obj => obj.requestmsg === 'Requested');
     const[value, setValues] = useState();
@@ -61,7 +63,7 @@ export const Requests = (props) => {
                                                 <Form.Control plaintext readOnly value={obj.name} />
                                             </Col>
                                             <Form.Label column sm="9" style={{textAlign:'left'}}>
-                                                Has Requested Additional Time.
+                                                {t("Has Requested Additional Time")}.
                                             </Form.Label>
                                         </Form.Group>      
                                     </strong>     
@@ -70,7 +72,7 @@ export const Requests = (props) => {
                                 <Modal.Body>
                                     <Form.Group as={Row} className="mb-3"  >
                                         <Form.Label column sm="2" style={{textAlign:'left'}}>
-                                            For Task : 
+                                            {t("For Task")} : 
                                         </Form.Label>
                                         <Col sm="6">
                                             <Form.Label column sm="8" style={{textAlign:'start'}}>
@@ -85,18 +87,18 @@ export const Requests = (props) => {
                                             <Form.Select name='time' 
                                                 onChange={(e) => setValues(e.target.value) } 
                                             >
-                                                <option >Choose time..</option>
-                                                <option value='15'> 15 Min </option>
-                                                <option value='30'> 30 Min </option>
-                                                <option value='45'> 45 Min </option>
-                                                <option value='60'> 60 Min </option>
+                                                <option >{t("Choose time")}..</option>
+                                                <option value='15'> 15 {t("Min")} </option>
+                                                <option value='30'> 30 {t("Min")} </option>
+                                                <option value='45'> 45 {t("Min")} </option>
+                                                <option value='60'> 60 {t("Min")} </option>
                                             </Form.Select>  
                                         </Col>
                                         <Col sm='3'> 
-                                            <Button size='sm' variant="success" onClick={()=>handleapprove(obj.taskid)}>Approve</Button>
+                                            <Button size='sm' variant="success" onClick={()=>handleapprove(obj.taskid)}>{t("Approve")}</Button>
                                         </Col>
                                         <Col sm='3'>
-                                            <Button size='sm' variant="danger" onClick={()=>handlereject(obj.taskid)}  >Deny</Button>
+                                            <Button size='sm' variant="danger" onClick={()=>handlereject(obj.taskid)}  >{t("Deny")}</Button>
                                         </Col>
                                     </Form.Group>
                                 </Modal.Body>

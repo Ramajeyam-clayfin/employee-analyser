@@ -3,14 +3,20 @@ import { useSelector  } from 'react-redux';
 import { useNavigate } from "react-router-dom"
 import { Login1 } from "./Login1";
 import { fakeAuth } from "./fakeAuth"
+import { useTranslation } from 'react-i18next';
 
 
 export default function Login (){
     let navigate = useNavigate()
+    const { i18n} = useTranslation("Language"); 
 
     const logindata = useSelector( (state) => state) 
+
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    useEffect ( ()=> i18n.changeLanguage('en'), []);
     
     useEffect (() => {
+        
         if(!logindata.errormessageuser || !logindata.errormessagepass){
             if(logindata.account === 1){
                fakeAuth.login(() => { navigate(`employee/${logindata.username.toLowerCase()}`) });

@@ -3,8 +3,10 @@ import {Button, Container, Row, Col, Form, Toast,InputGroup,} from 'react-bootst
 import { TaskValidation } from '../Login/Validation';
 import moment from 'moment';
 import {Datas} from '../Components/Context';
+import { useTranslation } from 'react-i18next';
 
 export const AssignTask = (props) => {
+    const { t, } = useTranslation("Language"); 
     const {tasks, setTasks, setShowA, showA, Name, Id } = useContext(Datas);
 
     const [error, setError] = useState('');
@@ -50,7 +52,7 @@ export const AssignTask = (props) => {
                     <Toast {...props} className="container-fluid p-4 my-4 "  style={{ width: '90%' }}>
                         <Toast.Header>
                                 <Form.Label column sm="2">
-                                    For :
+                                    {t("For")} :
                                 </Form.Label>
                                 <Col sm="3">
                                     <Form.Control plaintext readOnly value={Name} />
@@ -65,7 +67,7 @@ export const AssignTask = (props) => {
                                 <Col sm="4">
                                     <Form.Control 
                                         type="text"
-                                        placeholder="Task"
+                                        placeholder={t("Task")}
                                         required
                                         focus='true'
                                         className='input'
@@ -78,7 +80,7 @@ export const AssignTask = (props) => {
                                 <Col sm="4">
                                     <Form.Control 
                                         type="text"
-                                        placeholder="Descripition"
+                                        placeholder={t("Descripition")}
                                         required
                                         name="description"
                                         isInvalid={ !!error}
@@ -90,7 +92,7 @@ export const AssignTask = (props) => {
                                     <InputGroup className="mb-3">
                                         <Form.Control 
                                             type="number"
-                                            placeholder="Time"
+                                            placeholder={t("Time")}
                                             required
                                             name="tasktitle"
                                             isInvalid={ !!error}
@@ -100,16 +102,16 @@ export const AssignTask = (props) => {
                                         {/* <Form.Control.Feedback type='invalid' >{error}</Form.Control.Feedback> */}
                                         <Form.Select name='format' onChange={(e) =>
                                                 setValues(values => ({ ...values, timeformat: e.target.value}) ) } >
-                                            <option value="" >Format</option>
-                                            <option value='Hrs'> Hours </option>
-                                            <option value='Min'> Minutes </option>
+                                            <option value="" >{t("Format")}</option>
+                                            <option value='Hrs'> {t("Hours")} </option>
+                                            <option value='Min'> {t("Minutes")} </option>
                                         </Form.Select>  
                                     </InputGroup>
                                 </Col>
                                 
                             </Form.Group>
                         </Toast.Body>
-                        <Button variant="primary" onClick={Additem}>Assign</Button>
+                        <Button variant="primary" onClick={Additem}>{t("Assign")}</Button>
                     </Toast>
                 </Col>
             </Container>
