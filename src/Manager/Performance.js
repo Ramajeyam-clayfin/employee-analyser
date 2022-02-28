@@ -3,8 +3,9 @@ import { NavLink ,  } from 'react-router-dom';
 import {Button, Form, Col, Row, Container,Table, Spinner  } from 'react-bootstrap';
 import {Datas} from '../Components/Context';
 import axios from 'axios';
-import { Doughnut} from 'react-chartjs-2';
-import { PieChart, Pie,} from 'recharts';
+import 'bootstrap/dist/css/bootstrap.min.css'; 
+// import { Doughnut} from 'react-chartjs-2';
+// import { PieChart, Pie,} from 'recharts';
 
 
 export const Performance = () => {
@@ -145,7 +146,7 @@ export const Performance = () => {
                 {/* <RadialBarChart width={700} height={700} data={localemp} outerRadius={250}>
                     <RadialBar minAngle={360} dataKey="percent" fill="green"  clockWise/>
                 </RadialBarChart> */}
-                 <PieChart width={700} height={700}>
+                 {/* <PieChart width={700} height={700}>
                     <Pie data={percentage} dataKey="percent" outerRadius={250} fill="green" />
                 </PieChart>
                 <Doughnut
@@ -160,7 +161,17 @@ export const Performance = () => {
                         display:true,
                         position:'right'
                         }
-                    }}/>
+                    }}/> */}
+
+                {/* <div className="progress blue"> 
+                    <span className="progress-left"> 
+                        <span className="progress-bar"></span> 
+                    </span> 
+                    <span className="progress-right"> 
+                        <span className="progress-bar"></span>
+                    </span>
+                    <div className="progress-value">90%</div>
+                </div> */}
                 </Container>
                 )}
             </div>

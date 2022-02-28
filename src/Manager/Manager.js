@@ -1,5 +1,5 @@
 import React, {useContext, useState, useEffect} from 'react';
-// import { NavLink ,  } from 'react-router-dom';
+import { NavLink ,  } from 'react-router-dom';
 import axios from 'axios';
 import { useTranslation } from 'react-i18next';
 
@@ -73,11 +73,11 @@ export default function Manager (){
             <hr/>
             <h1 >
                 <Button  style={{float:'left', marginLeft:'30px'}} onClick={()=>setShowB(!showB)}> {showB? `${t("Back")}` : `${t("Assigned Tasks")}`}</Button>
-                {/* <NavLink to='/manager/performance'><Button> Employee Performance</Button></NavLink> */}
+                <NavLink to='/manager/performance'><Button> Employee Performance</Button></NavLink>
                     {message.length? 
                             <Button variant="outline-danger"  onClick={()=>setShowC(!showC)} style={{float:'right', marginRight:'30px'}}>
                                 <Badge pill bg="warning" text="danger" >{message.length}</Badge>
-                                {t("Requests")}
+                                {' '} {t("Requests")}
                             </Button> 
                         :  <Button variant="outline-success" disabled style={{float:'right', marginRight:'30px'}}>
                                 <Badge bg="success">{message.length}</Badge>

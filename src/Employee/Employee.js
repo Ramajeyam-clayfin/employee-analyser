@@ -156,7 +156,7 @@ export default function Employee (){
                     ...value,
                     color: variant1,
                     percent: totalcalc < 10 ? 10 : totalcalc ,
-                    pending: value.pending - 1,
+                    pending: (value.pending - 1),
                     completed: value.completed + 1,
                };
             //    console.log(value)
