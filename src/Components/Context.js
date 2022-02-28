@@ -20,11 +20,12 @@ export const DataProvider = (props) =>{
         timeformat:'Min',
         status:'Pending',
         taskstatus: false,
-        assigndate:'03:00 PM',
+        assigndate:'08:00 AM',
         completedate:'',
         requests:false,
         requestmsg:'Requested',
-        taskid: 1645686727071
+        taskid: 1645686727071,
+        taskpercent : 0,
         },
         {
             name: 'Employee4',
@@ -37,29 +38,14 @@ export const DataProvider = (props) =>{
             timeformat:'Min',
             status:'Pending',
             taskstatus: false,
-            assigndate:'3:25 PM',
+            assigndate:'8:15 AM',
             completedate:'',
             requests:false,
             requestmsg:'',
-            taskid:1645686727080
+            taskid:1645686727080,
+            taskpercent : 0,
         },
-        {
-            name: 'Employee4',
-            empid: 1004,
-            tasktitle: 'Learn React',
-            taskdesc:'Any 5 Topics',
-            giventime: 60,
-            finishtime: null,
-            extraatime: null,
-            timeformat:'Min',
-            status:'Pending',
-            taskstatus: false,
-            assigndate:'3:25 PM',
-            completedate:'',
-            requests:false,
-            requestmsg:'',
-            taskid:1645686727081
-        },
+        
     ])
  
 

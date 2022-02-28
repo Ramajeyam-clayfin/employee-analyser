@@ -4,6 +4,7 @@ import { fakeAuth } from "./fakeAuth"
 
 const PrivateElement = ({ children }) => {
   let location = useLocation()
+  console.log(location)
   return( fakeAuth.isAuthenticated ? (children) : ( <Navigate to="/" state={{ from: location }} />))
 }
 

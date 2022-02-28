@@ -14,28 +14,16 @@ export const validtaion = (value) => {
         }
         else errormessagepass = 'Username and Password did not match'
     }
-    else if(  value.username.toLowerCase() === "employee1" 
-            ||value.username.toLowerCase() === "employee2"
-            ||value.username.toLowerCase() === "employee3" 
-            ||value.username.toLowerCase() === "employee4" 
-            ||value.username.toLowerCase() === "employee5" 
-            ||value.username.toLowerCase() === "employee6" )
+    else if(  (value.username.toLowerCase() === "employee1" && value.password === "employee1")
+            ||(value.username.toLowerCase() === "employee2" && value.password === "employee2")
+            ||(value.username.toLowerCase() === "employee3" && value.password === "employee3" )
+            ||(value.username.toLowerCase() === "employee4" && value.password === "employee4")
+            ||(value.username.toLowerCase() === "employee5" && value.password === "employee5")
+            ||(value.username.toLowerCase() === "employee6" && value.password === "employee6") )
         {
-            // console.log('name')
-            if(   value.password === "employee1" 
-                ||value.password === "employee2"
-                ||value.password === "employee3" 
-                ||value.password === "employee4" 
-                ||value.password === "employee5" 
-                ||value.password === "employee6" )
-            {
-                // console.log('pass')
                 errormessagepass =''
-            }
-            else errormessagepass = 'Username and Password did not match'
         }
-    else errormessageuser = 'Invalid Username'
-
+            else errormessagepass = 'Username and Password did not match'
 
     return { errormessageuser: errormessageuser, errormessagepass: errormessagepass }
 }

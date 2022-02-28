@@ -29,7 +29,7 @@ export default function Manager (){
     const [localemp, setlocalemp] = useState([]);
 
     let message = tasks.filter(obj => obj.requestmsg === 'Requested');
-    console.log(message, 'mesage')
+    // console.log(message, 'mesage')
 
     const showHide = showB ? "edit display-block" : "edit display-none";
     const Hideshow = showB ?  "edit display-none" : "edit display-block";
@@ -73,7 +73,7 @@ export default function Manager (){
             <hr/>
             <h1 >
                 <Button  style={{float:'left', marginLeft:'30px'}} onClick={()=>setShowB(!showB)}> {showB? `${t("Back")}` : `${t("Assigned Tasks")}`}</Button>
-                <NavLink to='/manager/performance'><Button> Employee Performance</Button></NavLink>
+                {/* <NavLink to='/manager/performance'><Button> Employee Performance</Button></NavLink> */}
                     {message.length? 
                             <Button variant="outline-danger"  onClick={()=>setShowC(!showC)} style={{float:'right', marginRight:'30px'}}>
                                 <Badge pill bg="warning" text="danger" >{message.length}</Badge>
@@ -103,6 +103,7 @@ export default function Manager (){
                         <th>{t("Given Time Limit")}</th>
                         <th>{t("Status")}</th>
                         <th>{t("Time Taken To Complete")}</th>
+                        <th>{t("Task Percentage")}</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -117,6 +118,7 @@ export default function Manager (){
                                 <td>{tasks.giventime} {tasks.timeformat}</td>
                                 <td>{tasks.status}</td>
                                 <td>{tasks.finishtime !== null ? `${tasks.finishtime}` : 'N/A'} </td>
+                                <td>{tasks.taskpercent}</td>
                                 </tr>
                             
                     )))

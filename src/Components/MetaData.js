@@ -6,7 +6,7 @@ export const metadata =[
         empid: 1001,
         position: 'Software Trainee',
         gender: 'Male',
-        percent: 80,
+        percent: 100,
         color:'success',
         totaltasks: 0,
         pending: 0,

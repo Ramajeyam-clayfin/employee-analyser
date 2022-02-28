@@ -88,10 +88,10 @@ export default function Employee (){
                 if(minutesDiff > 60){ // if time taken is greater than 60 means we converting minutes into hours
                     hour = moment('00:00', "hh:mm").add(minutesDiff, 'minutes').format('hh:mm')
                 }
-                console.log(minutesDiff)
+                // console.log(minutesDiff)
 
                 const giventime = moment.duration(moment(obj.giventime, 'HH:mm').format("HH:mm")).asMinutes() // it will converts the given time to minutes
-                console.log(giventime)
+                // console.log(giventime)
 
                 if(minutesDiff > giventime){ //here we check the time taken to complete the task is greater than the given time
                     let calc1 = (minutesDiff - giventime)/giventime*100; //calculating the percentage (time taken / given time)/ giventime x 100
@@ -101,17 +101,17 @@ export default function Employee (){
                     }
                 }
                 else { //if the time taken is less than given time means percentage will be 100%
-                    calc = 100;
-                   
+                    calc = 100; 
                 }
                 totalcalc = Math.round((totalcalc + calc)/2) // previous percentage and cuurent percentage is tallyed
                 
-                console.log(calc, 'Calc')
+                // console.log(calc, 'Calc')
               obj = { ...obj, 
                         status:'Completed',
                         taskstatus:true,
                         completedate: time,
                         finishtime: minutesDiff > 60 ? `${hour} Hrs` : `${minutesDiff} Min`,
+                        taskpercent : calc,
                     };
             }
             return obj;
@@ -125,6 +125,7 @@ export default function Employee (){
                 taskstatus:true,
                 completedate: time, 
                 finishtime: minutesDiff > 60 ? `${hour} Hrs` : `${minutesDiff} Min`,
+                taskpercent : calc,
                 };
             }
             return obj;
@@ -140,7 +141,7 @@ export default function Employee (){
         else {
             variant1 ='warning';
         }
-        console.log(variant1, "Variant")
+        // console.log(variant1, "Variant")
 
         const empupdate = employees.map( value => {
             if (value.empid === empid){ 
@@ -151,7 +152,7 @@ export default function Employee (){
                     pending: value.pending - 1,
                     completed: value.completed + 1,
                };
-               console.log(value)
+            //    console.log(value)
             }
             return value;
             })
