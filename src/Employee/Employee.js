@@ -74,9 +74,11 @@ export default function Employee (){
         let totalcalc = percent; //for percantage calculation
         let hour; 
         let calc ;
+        let calc1 ;
         let minutesDiff; // for completion time calculation
         let time = moment().format("h:mm a"); //for current time
         let variant1 = variant //for color in percentage bar
+        let giventime ;
 
         const updates = task.map( (obj) => {
             if (obj.taskid === id) {
@@ -90,12 +92,16 @@ export default function Employee (){
                 }
                 // console.log(minutesDiff)
 
-                const giventime = moment.duration(moment(obj.giventime, 'HH:mm').format("HH:mm")).asMinutes() // it will converts the given time to minutes
+                giventime = (obj.timeformat === "Min") ? (obj.giventime) : ( moment.duration(moment(obj.giventime, 'HH:mm').format("HH:mm")).asMinutes() )// it will converts the given time to minutes
                 // console.log(giventime)
 
                 if(minutesDiff > giventime){ //here we check the time taken to complete the task is greater than the given time
-                    let calc1 = (minutesDiff - giventime)/giventime*100; //calculating the percentage (time taken / given time)/ giventime x 100
+                    console.log(minutesDiff, "minutesDiff")
+                    console.log(giventime,"giventime")
+                    calc1 = (minutesDiff - giventime)/giventime*100; //calculating the percentage (time taken / given time)/ giventime x 100
+                    console.log(calc1, "calc1")
                     calc = Math.round(100-calc1); // calc1 is minus by 100 remaining value is our percentage
+                    console.log(calc, "calc")
                     if(Math.sign(calc) === -1){ // if percentage contains negative value means assigning as lowest percentage of 10%
                         calc = 10 ; 
                     }
@@ -104,6 +110,7 @@ export default function Employee (){
                     calc = 100; 
                 }
                 totalcalc = Math.round((totalcalc + calc)/2) // previous percentage and cuurent percentage is tallyed
+                console.log(totalcalc, "totalcalc")
                 
                 // console.log(calc, 'Calc')
               obj = { ...obj, 
@@ -111,7 +118,7 @@ export default function Employee (){
                         taskstatus:true,
                         completedate: time,
                         finishtime: minutesDiff > 60 ? `${hour} Hrs` : `${minutesDiff} Min`,
-                        taskpercent : calc,
+                        taskpercent : Math.round(calc),
                     };
             }
             return obj;
@@ -125,7 +132,7 @@ export default function Employee (){
                 taskstatus:true,
                 completedate: time, 
                 finishtime: minutesDiff > 60 ? `${hour} Hrs` : `${minutesDiff} Min`,
-                taskpercent : calc,
+                taskpercent :  Math.round(calc),
                 };
             }
             return obj;

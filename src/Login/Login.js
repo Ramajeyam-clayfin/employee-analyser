@@ -19,9 +19,9 @@ export default function Login (){
         
         if(!logindata.errormessageuser || !logindata.errormessagepass){
             if(logindata.account === 1){
-               fakeAuth.login(() => { navigate(`employee/${logindata.username.toLowerCase()}`) });
+               fakeAuth.login( () => { navigate(`employee/${logindata.username.toLowerCase()}`) } );
            } else if(logindata.account === 2){
-               fakeAuth.login(() => { navigate(`/${logindata.username.toLowerCase()}`) });
+               fakeAuth.login( () => { navigate(`/${logindata.username.toLowerCase()}`) } );
            }else return <Login1/>
        }else return <Login1/>
           

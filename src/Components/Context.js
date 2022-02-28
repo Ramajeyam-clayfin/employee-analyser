@@ -20,7 +20,7 @@ export const DataProvider = (props) =>{
         timeformat:'Min',
         status:'Pending',
         taskstatus: false,
-        assigndate:'08:00 AM',
+        assigndate:'10:30 AM',
         completedate:'',
         requests:false,
         requestmsg:'Requested',
