@@ -3,7 +3,7 @@ import { NavLink ,  } from 'react-router-dom';
 import axios from 'axios';
 import { useTranslation } from 'react-i18next';
 
-import {Button, Container, Row, Col, Card, Spinner, Table,ProgressBar,Badge, } from 'react-bootstrap';
+import {Button, Container, Row, Col, Card, Spinner, Table,ProgressBar,Badge,Form, InputGroup } from 'react-bootstrap';
 import Female from '../Images/female.png';
 import Male from '../Images/male.png';
 import {  useDispatch  } from 'react-redux';
@@ -69,11 +69,25 @@ export default function Manager (){
     else {
     return(
         <div>
-            <h1>{t("managerheading")}<Button onClick={() => handlelogout() }  style={{float:'right', marginRight:'30px', marginTop:'10px'}}>{t("logout")}</Button></h1>
+            <h1>
+                {t("managerheading")}
+                <Button onClick={() => handlelogout() }  style={{float:'right', marginRight:'30px', marginTop:'10px'}}>{t("logout")}</Button>
+                {/* <InputGroup size="sm" className="mb-3">
+                   
+                    <Form.Control
+                            size="sm" 
+                            type="search"
+                            placeholder="Search"
+                        />
+                        <Button variant="outline-success">Search</Button>
+                </InputGroup> */}
+            </h1>
             <hr/>
             <h1 >
+                
                 <Button  style={{float:'left', marginLeft:'30px'}} onClick={()=>setShowB(!showB)}> {showB? `${t("Back")}` : `${t("Assigned Tasks")}`}</Button>
-                <NavLink to='/manager/performance'><Button> Employee Performance</Button></NavLink>
+                
+                <NavLink to='/manager/performance'><Button> {t("Employee Performance")}</Button></NavLink>
                     {message.length? 
                             <Button variant="outline-danger"  onClick={()=>setShowC(!showC)} style={{float:'right', marginRight:'30px'}}>
                                 <Badge pill bg="warning" text="danger" >{message.length}</Badge>

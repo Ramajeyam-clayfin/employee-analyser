@@ -10,9 +10,7 @@ export const Login1 = () =>{
     const erroruser = useSelector( (state) => state.erroruser)
     const errorpass = useSelector( (state) => state.errorpass)
     const[values, setValues] = useState({});
-    const { t, } = useTranslation("Language");  
-    
-    
+    const { t } = useTranslation("Language");  
 
     const handlelogin = (event) => {
         // event.preventDefault();
@@ -23,7 +21,6 @@ export const Login1 = () =>{
 
     }
     
-
     return(
         <div>
             <div>

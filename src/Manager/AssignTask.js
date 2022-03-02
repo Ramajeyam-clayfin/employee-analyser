@@ -15,9 +15,47 @@ export const AssignTask = (props) => {
     const Additem = (event) => {
         event.preventDefault();
         let result = TaskValidation(values);
+        let error =''
+        employees.map( value => {
+            if (value.empid === Id){ 
+                if (value.workhours === '00:00'){
+                   return error = 'Total Work exceeds'
+                   }
+                   else return error = ''
+                }
+                else return null
+            } )
 
-        if(!result.error)  
+        if(!result.error && !error )  
         {
+        
+            const empupdate = employees.map( value => {
+                if (value.empid === Id){ 
+                   
+                   let hour = moment('12:00', "hh:mm").add(value.workhours, 'minutes').format('hh:mm')
+                   let taskhour = values.giventime
+                   let temphour = moment(taskhour, "hh").add('00:00', 'minutes').format('hh:mm')
+                   let tothour = moment(hour, "hh:mm").subtract(temphour, 'minutes').format('hh:mm') 
+                   if (tothour === '12:00'){
+                    tothour = '00:00'
+                   }
+                   console.log(hour, "hour")
+                   console.log(taskhour, "taskhour")
+                   console.log(tothour, "totalhour")
+                   console.log(temphour, "temphour")
+                   value = {
+                        ...value,
+                        pending: value.pending + 1,
+                        totaltasks: value.totaltasks + 1,
+                        workhours: tothour,
+                   };
+                }
+                return value;
+            })
+            setemployees(empupdate);
+            setError('');
+            setShowA(!showA);
+            setValues({});
             let push = [ 
                 { 
                     name: Name,
@@ -38,23 +76,8 @@ export const AssignTask = (props) => {
                 }, ...tasks];
             console.log(push,'push')
             setTasks(push);
-
-            const empupdate = employees.map( value => {
-                if (value.empid === Id){ 
-                   value = {
-                        ...value,
-                        pending: value.pending + 1,
-                        totaltasks: value.totaltasks + 1,
-                   };
-                }
-                return value;
-            })
-            setemployees(empupdate);
-            setError('');
-            setShowA(!showA);
-            setValues({});
         }
-        else setError(result.error);
+        else setError(result.error || error);
     }
 
     return(

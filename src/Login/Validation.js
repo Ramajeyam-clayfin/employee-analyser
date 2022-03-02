@@ -37,11 +37,17 @@ export const TaskValidation = (value) => {
     let error = '';
     // console.log(title, desc, giventime, format)
     // console.log(Number.isInteger(Number(giventime)))
+    
     if(!title || !desc || !giventime || !format){
         error = 'Please Fill All Field'
     }
-    else {
-        if(format === 'Hrs'){
+    else if(Math.sign(giventime) === -1){ 
+        error = 'Invalid Time'
+    }
+    else if(Math.sign(giventime) === 0){ 
+        error = 'Invalid Time'
+    } 
+    else if(format === 'Hrs'){
             if(!Number.isInteger(Number(giventime))){
                 let myArray = giventime.split(".");
                 let zero = myArray[1].split('0');
@@ -82,7 +88,6 @@ export const TaskValidation = (value) => {
         }
         else if (format === '')
                 error = 'Please choose Time format'
-    }
         
     
     return {giventime: giventime, format:format, error:error}

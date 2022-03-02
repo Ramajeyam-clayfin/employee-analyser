@@ -11,6 +11,7 @@ export const metadata =[
         totaltasks: 0,
         pending: 0,
         completed: 0,
+        workhours: "08:00" ,
     },
     {
         id: Date.now()+2,
@@ -23,6 +24,7 @@ export const metadata =[
         totaltasks: 0,
         pending: 0,
         completed: 0,
+        workhours: "08:00" ,
     },
     {
         id: Date.now()+3,
@@ -35,6 +37,7 @@ export const metadata =[
         totaltasks: 0,
         pending: 0,
         completed: 0,
+        workhours: "08:00" ,
     },
     {
         id: Date.now()+4,
@@ -47,6 +50,7 @@ export const metadata =[
         totaltasks: 0,
         pending: 0,
         completed: 0,
+        workhours: "08:00" ,
     },
     {
         id: Date.now()+5,
@@ -59,6 +63,7 @@ export const metadata =[
         totaltasks: 0,
         pending: 0,
         completed: 0,
+        workhours: "08:00" ,
     },
     {
         id: Date.now()+6,
@@ -71,5 +76,6 @@ export const metadata =[
         totaltasks: 0,
         pending: 0,
         completed: 0,
+        workhours: "08:00" ,
     },
 ]
