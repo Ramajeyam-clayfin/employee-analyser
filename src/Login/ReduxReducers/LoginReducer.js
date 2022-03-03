@@ -39,7 +39,7 @@ const initialState = {
                     username: action.value.username, 
                     password: action.value.password, 
                     erroruser: action.erroruser, 
-                    errorpass:action.errorpass 
+                    errorpass: action.errorpass 
                 }
                 
             }
