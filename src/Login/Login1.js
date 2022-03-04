@@ -34,7 +34,7 @@ export const Login1 = () =>{
                         required
                         name="username"
                         onChange={(e) =>
-                            setValues(values => ({ ...values, username: e.target.value }) ) }
+                            setValues(values => ({ ...values, username: e.target.value }) ) }   
                         isInvalid={ !!erroruser}
                     />
                     <Form.Control.Feedback type='invalid' >{erroruser}</Form.Control.Feedback>

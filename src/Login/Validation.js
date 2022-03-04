@@ -54,7 +54,7 @@ export const TaskValidation = (value) => {
                 let nonsero = !zero[0] ? zero[1] : myArray[1]
                 let zerohrs = myArray[0].split('0');
                 let nonzerohrs = !zerohrs[0] ? zerohrs[1] : myArray[0]
-                if(nonzerohrs < 25){
+                if(nonzerohrs < 7){
                     if(nonsero < 61){
                         let hrs = nonzerohrs > 9 ? `${nonzerohrs}` : `0${nonzerohrs}`
                         let min = nonsero > 9 ? `${nonsero}` : `0${nonsero}`
@@ -66,12 +66,12 @@ export const TaskValidation = (value) => {
                 else error ='Invalid Hour'
                 
             }
-            else if(giventime < 24){
+            else if(giventime <= 8){
                 let zerohrs = giventime.split('0');
                 let nonzerohrs = !zerohrs[0] ? zerohrs[1] : giventime
                     giventime = nonzerohrs > 9 ? `${nonzerohrs}:00` : `0${nonzerohrs}:00`
                 }
-            else error = 'Time mut be less than 24 Hrs'
+            else error = 'Time mut be less than 8 Hrs'
         }
         else if(format === 'Min'){
             if(!Number.isInteger(Number(giventime))){

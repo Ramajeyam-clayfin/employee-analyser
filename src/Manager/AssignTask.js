@@ -19,7 +19,7 @@ export const AssignTask = (props) => {
         employees.map( value => {
             if (value.empid === Id){ 
                 if (value.workhours === '00:00'){
-                   return error = 'Total Work exceeds'
+                   return error = 'Total Work Time exceeds'
                    }
                    else return error = ''
                 }

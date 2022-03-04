@@ -17,21 +17,21 @@ export const Performance = () => {
     const [localtask, setlocaltask] = useState([]);
     const [percentage, setpercentage] = useState([]);
     // const temp = employees.filter(obj=> Number(obj.empid) === Number(emp))
-    const state = {
-        labels: ['Percentage'],
-        datasets: [
-          {
-            label: 'Percentage',
-            backgroundColor: [
-              '#2FDE00',
-            ],
-            hoverBackgroundColor: [
-            '#175000',
-            ],
-            data: [percentage , 100-percentage]
-          }
-        ]
-      }
+    // const state = {
+    //     labels: ['Percentage'],
+    //     datasets: [
+    //       {
+    //         label: 'Percentage',
+    //         backgroundColor: [
+    //           '#2FDE00',
+    //         ],
+    //         hoverBackgroundColor: [
+    //         '#175000',
+    //         ],
+    //         data: [percentage , 100-percentage]
+    //       }
+    //     ]
+    //   }
 
     useEffect (() => {
         setloading(true);
