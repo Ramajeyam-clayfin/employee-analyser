@@ -33,10 +33,10 @@ function App() {
       {/* for Usecontext   */}
         <DataProvider>
             <Routes>
-              <Route index element={<Login/>} />
-              <Route path="/employee/*" element={<PrivateRoute> <Employee/> </PrivateRoute> }/>
-              <Route path="/manager" element={ <PrivateRoute> <Manager/> </PrivateRoute> } />
-              <Route path="/manager/performance" element={<Performance/>}/>
+              <Route path='employee-analyser/' element={<Login/>} />
+              <Route path="employee-analyser/employee/*" element={<PrivateRoute> <Employee/> </PrivateRoute> }/>
+              <Route path="employee-analyser/manager" element={ <PrivateRoute> <Manager/> </PrivateRoute> } />
+              <Route path="employee-analyser/manager/performance" element={<Performance/>}/>
             </Routes>
         </DataProvider>
       </Provider>

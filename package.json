@@ -1,4 +1,5 @@
 {
+  "homepage": "https://ramajeyam-clayfin.github.io/employee-analyser/",
   "name": "employee-analyser",
   "version": "0.1.0",
   "private": true,
@@ -9,6 +10,7 @@
     "axios": "^0.26.0",
     "bootstrap": "^5.1.3",
     "bootstrap-icons": "^1.8.1",
+    "gh-pages": "^3.2.3",
     "i18next": "^21.6.12",
     "i18next-browser-languagedetector": "^6.1.3",
     "i18next-xhr-backend": "^3.2.2",
@@ -26,6 +28,8 @@
     "web-vitals": "^2.1.4"
   },
   "scripts": {
+    "predeploy": "npm run build",
+	  "deploy": "gh-pages -d build",
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
