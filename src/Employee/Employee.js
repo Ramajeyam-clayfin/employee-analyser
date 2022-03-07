@@ -168,7 +168,7 @@ export default function Employee (){
 
     const handlelogout = () =>{
         dispatch(logout())
-        fakeAuth.logout( () => navigate("/", { state: { from: { pathname: "/" } } }) )
+        fakeAuth.logout( () => navigate("/employee-analyser", { state: { from: { pathname: "/" } } }) )
     }
 
     return(

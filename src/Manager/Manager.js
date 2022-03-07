@@ -3,7 +3,7 @@ import { NavLink ,  } from 'react-router-dom';
 import axios from 'axios';
 import { useTranslation } from 'react-i18next';
 
-import {Button, Container, Row, Col, Card, Spinner, Table,ProgressBar,Badge,Form, InputGroup } from 'react-bootstrap';
+import {Button, Container, Row, Col, Card, Spinner, Table,ProgressBar,Badge, } from 'react-bootstrap';
 import Female from '../Images/female.png';
 import Male from '../Images/male.png';
 import {  useDispatch  } from 'react-redux';
@@ -60,7 +60,7 @@ export default function Manager (){
 
     const handlelogout = () =>{
         dispatch(logout())
-        fakeAuth.logout( () => navigate("/", { state: { from: { pathname: "/" } } }) )
+        fakeAuth.logout( () => navigate("/employee-analyser", { state: { from: { pathname: "/" } } }) )
     }
       
     if (loading) {
@@ -152,7 +152,7 @@ export default function Manager (){
                                         <Card.Title>{s.name}</Card.Title>
                                         <Card.Text>{t("Employee ID")} : {s.empid}</Card.Text>
                                         <Card.Text>{t("Designation")} : {s.position}</Card.Text>
-                                        <ProgressBar animated variant={s.color} now={s.percent} label={`${s.percent} %`} />
+                                        <ProgressBar  variant={s.color} now={s.percent} label={`${s.percent} %`} />
                                         <Card.Text></Card.Text>
                                         <Button onClick={()=>toggleShowA(s.empid, s.name)} className="mb-2">
                                         {t("Assign task")}

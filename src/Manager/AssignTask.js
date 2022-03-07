@@ -1,4 +1,4 @@
-import React, {useContext, useState} from "react";
+import React, {useContext, useState, useEffect} from "react";
 import {Button, Container, Row, Col, Form, Toast,InputGroup,} from 'react-bootstrap';
 import { TaskValidation } from '../Login/Validation';
 import moment from 'moment';
@@ -11,6 +11,9 @@ export const AssignTask = (props) => {
 
     const [error, setError] = useState('');
     const [values, setValues] = useState({});
+    const [focus, setFocus] = useState(false);
+
+    useEffect (() => {setFocus(true) },[]);
 
     const Additem = (event) => {
         event.preventDefault();
@@ -104,7 +107,7 @@ export const AssignTask = (props) => {
                                         type="text"
                                         placeholder={t("Task")}
                                         required
-                                        focus='true'
+                                        focus={focus.toString()}
                                         className='input'
                                         name="tasktitle"
                                         isInvalid={ !!error}
